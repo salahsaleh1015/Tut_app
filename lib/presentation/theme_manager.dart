@@ -22,23 +22,26 @@ ThemeData getApplicationTheme() {
           shadowColor: ColorManager.lightPrimary,
           titleTextStyle: getRegularTextStyle(
               color: ColorManager.white, fontSize: FontSize.s14)),
-    buttonTheme: ButtonThemeData(
-      shape: StadiumBorder(),
-      splashColor: ColorManager.lightPrimary,
-      buttonColor: ColorManager.primary,
-      disabledColor: ColorManager.grey1,
-
-    ),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        textStyle: getRegularTextStyle(color: ColorManager.white,fontSize: AppSize.s18),
-        primary: ColorManager.primary,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppSize.s4),
-
-        )
-      )
-    )
-
-  );
+      buttonTheme: ButtonThemeData(
+        shape: StadiumBorder(),
+        splashColor: ColorManager.lightPrimary,
+        buttonColor: ColorManager.primary,
+        disabledColor: ColorManager.grey1,
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+              textStyle: getRegularTextStyle(
+                  color: ColorManager.white, fontSize: FontSize.s18),
+              primary: ColorManager.primary,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppSize.s4),
+              ))),
+      textTheme: TextTheme(
+        displayLarge: getSemiBoldTextStyle(
+            color: ColorManager.darkGrey, fontSize: FontSize.s16),
+        titleMedium: getMediumTextStyle(
+            color: ColorManager.lightGrey, fontSize: FontSize.s14),
+        bodySmall: getRegularTextStyle(color: ColorManager.grey1),
+        bodyLarge: getRegularTextStyle(color: ColorManager.grey),
+      ));
 }
