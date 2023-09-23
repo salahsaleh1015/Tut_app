@@ -43,5 +43,39 @@ ThemeData getApplicationTheme() {
             color: ColorManager.lightGrey, fontSize: FontSize.s14),
         bodySmall: getRegularTextStyle(color: ColorManager.grey1),
         bodyLarge: getRegularTextStyle(color: ColorManager.grey),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        contentPadding: EdgeInsets.all(AppPadding.p8),
+        hintStyle: getRegularTextStyle(
+            color: ColorManager.grey, fontSize: FontSize.s14),
+        labelStyle: getRegularTextStyle(
+            color: ColorManager.grey, fontSize: FontSize.s14),
+        errorStyle: getRegularTextStyle(
+          color: ColorManager.error,
+        ),
+        enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(AppSize.s8),
+            borderSide: BorderSide(
+              color: ColorManager.grey,
+              width: AppSize.s1_5,
+            )),
+        focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(AppSize.s8),
+            borderSide: BorderSide(
+              color: ColorManager.primary,
+              width: AppSize.s1_5,
+            )),
+        errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(AppSize.s8),
+            borderSide: BorderSide(
+              color: ColorManager.error,
+              width: AppSize.s1_5,
+            )),
+        focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(AppSize.s8),
+            borderSide: BorderSide(
+              color: ColorManager.primary,
+              width: AppSize.s1_5,
+            )),
       ));
 }
