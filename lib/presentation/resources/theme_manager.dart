@@ -6,6 +6,7 @@ import 'package:tut_app/presentation/resources/values_maneger.dart';
 
 ThemeData getApplicationTheme() {
   return ThemeData(
+    scaffoldBackgroundColor:ColorManager.white ,
       primaryColor: ColorManager.primary,
       primaryColorDark: ColorManager.darkPrimary,
       primaryColorLight: ColorManager.lightPrimary,
@@ -39,8 +40,9 @@ ThemeData getApplicationTheme() {
       textTheme: TextTheme(
         displayLarge: getSemiBoldTextStyle(
             color: ColorManager.darkGrey, fontSize: FontSize.s16),
+        displayMedium: getRegularTextStyle(color: ColorManager.darkGrey, fontSize: FontSize.s14),
         titleMedium: getMediumTextStyle(
-            color: ColorManager.lightGrey, fontSize: FontSize.s14),
+            color: ColorManager.primary, fontSize: FontSize.s16),
         bodySmall: getRegularTextStyle(color: ColorManager.grey1),
         bodyLarge: getRegularTextStyle(color: ColorManager.grey),
       ),
