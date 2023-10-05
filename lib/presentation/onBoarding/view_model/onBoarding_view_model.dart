@@ -11,9 +11,15 @@ class OnBoardingViewModel
         BaseViewModel,
         OnBoardingViewModelInputs,
         OnBoardingViewModelOutPuts {
-  StreamController _streamController = StreamController<SliderViewObject>();
+
+  final StreamController _streamController =
+      StreamController<SliderViewObject>();
+
+
   late final List<SliderObject> _list;
   int _pageCurrentIndex = 0;
+
+
   @override
   void dispose() {
     _streamController.close();
@@ -25,20 +31,22 @@ class OnBoardingViewModel
     _postDataInView();
   }
 
+
+
   @override
   int goNext() {
     int nextPageIndex = ++_pageCurrentIndex;
-    if(nextPageIndex==-1){
-      nextPageIndex = _list.length-1;
+    if (nextPageIndex == -1) {
+      nextPageIndex = _list.length - 1;
     }
     return nextPageIndex;
   }
 
   @override
   int goPrevious() {
-    int previousPageIndex =--_pageCurrentIndex;
-    if(previousPageIndex==-1){
-      previousPageIndex = _list.length-1;
+    int previousPageIndex = --_pageCurrentIndex;
+    if (previousPageIndex == -1) {
+      previousPageIndex = _list.length - 1;
     }
     return previousPageIndex;
   }
@@ -48,6 +56,9 @@ class OnBoardingViewModel
     _pageCurrentIndex = index;
     _postDataInView();
   }
+
+
+
   List<SliderObject> _getSliderData() => [
         SliderObject(StringManager.onBoardingTitle1,
             StringManager.onBoardingSubTitle1, ImageAssets.onBoardingLogo1),
@@ -59,6 +70,8 @@ class OnBoardingViewModel
             StringManager.onBoardingSubTitle4, ImageAssets.onBoardingLogo4),
       ];
 
+
+
   @override
   // TODO: implement inputSliderViewObject
   Sink get inputSliderViewObject => _streamController.sink;
@@ -68,8 +81,9 @@ class OnBoardingViewModel
   Stream<SliderViewObject> get outputSliderViewObject =>
       _streamController.stream.map((sliderViewObject) => sliderViewObject);
 
-  _postDataInView(){
-    inputSliderViewObject.add(SliderViewObject(_list[_pageCurrentIndex],  _pageCurrentIndex, _list.length));
+  _postDataInView() {
+    inputSliderViewObject.add(SliderViewObject(
+        _list[_pageCurrentIndex], _pageCurrentIndex, _list.length));
   }
 }
 
