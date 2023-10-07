@@ -87,7 +87,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                       child: GestureDetector(
                         onTap: () {
                           _pageController.animateToPage(_viewModel.goPrevious(),
-                              duration: Duration(
+                              duration: const Duration(
                                   milliseconds:
                                       AppConstant.animationSliderTime),
                               curve: Curves.bounceInOut);
@@ -103,7 +103,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                       children: [
                         for (int i = 0; i < sliderViewObject.numOfSlides; i++)
                           Padding(
-                            padding: EdgeInsets.all(AppPadding.p10),
+                            padding: const EdgeInsets.all(AppPadding.p10),
                             child: _getProperWidget(
                                 i, sliderViewObject.currentIndex),
                           )
@@ -114,7 +114,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                       child: GestureDetector(
                         onTap: () {
                           _pageController.animateToPage(_viewModel.goNext(),
-                              duration: Duration(
+                              duration: const Duration(
                                   milliseconds:
                                       AppConstant.animationSliderTime),
                               curve: Curves.bounceInOut);
@@ -139,12 +139,12 @@ class _OnBoardingViewState extends State<OnBoardingView> {
   Widget _getProperWidget(int index, int currentIndex) {
     if (index == currentIndex) {
       return Padding(
-        padding: EdgeInsets.all(AppPadding.p8),
+        padding: const EdgeInsets.all(AppPadding.p8),
         child: SvgPicture.asset(ImageAssets.hollowCircleIc),
       );
     } else {
       return Padding(
-        padding: EdgeInsets.all(AppPadding.p8),
+        padding: const EdgeInsets.all(AppPadding.p8),
         child: SvgPicture.asset(ImageAssets.solidCircleIc),
       );
     }
