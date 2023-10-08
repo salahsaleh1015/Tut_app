@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:tut_app/domain/entities.dart';
+import 'package:tut_app/domain/entities/entities.dart';
 import 'package:tut_app/presentation/base/base_view_model.dart';
 
 import '../../resources/assets_manager.dart';
