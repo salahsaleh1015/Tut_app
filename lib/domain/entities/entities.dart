@@ -15,7 +15,7 @@ class SliderViewObject{
 }
 
 
-class Customer{
+class Customer {
   String id;
 
   String name;
