@@ -1,4 +1,47 @@
+import 'package:dio/dio.dart';
+
 import 'failure/failure.dart';
+
+class ErrorHandler implements Exception {
+  late Failure failure;
+  ErrorHandler.handle(dynamic error) {
+    if (error is DioException) {
+      // error from API response or dio
+      failure = _handleError(error);
+    } else {
+      // default error
+      failure = DataSource.defaultError.getFailure();
+    }
+  }
+}
+
+Failure _handleError(DioException error) {
+  switch (error.type) {
+    case DioExceptionType.connectionTimeout:
+      return DataSource.connectTimeOut.getFailure();
+    case DioExceptionType.sendTimeout:
+      return DataSource.sentTimeout.getFailure();
+    case DioExceptionType.receiveTimeout:
+      return DataSource.receiveTimeOut.getFailure();
+    case DioExceptionType.badCertificate:
+      return DataSource.badRequest.getFailure();
+    case DioExceptionType.badResponse:
+      if (error.response != null &&
+          error.response?.statusCode != null &&
+          error.response?.statusMessage != null) {
+        return Failure(error.response?.statusCode ?? 0,
+            error.response?.statusMessage ?? "");
+      } else {
+        return DataSource.defaultError.getFailure();
+      }
+    case DioExceptionType.cancel:
+      return DataSource.cancel.getFailure();
+    case DioExceptionType.connectionError:
+      return DataSource.noInternetConnection.getFailure();
+    case DioExceptionType.unknown:
+      return DataSource.internalServerError.getFailure();
+  }
+}
 
 enum DataSource {
   success,
@@ -14,7 +57,7 @@ enum DataSource {
   sentTimeout,
   cacheError,
   noInternetConnection,
-  unKnown
+  defaultError,
 }
 
 class ResponseCode {
@@ -33,7 +76,7 @@ class ResponseCode {
   static const int sentTimeout = -4;
   static const int cacheError = -5;
   static const int noInternetConnection = -6;
-  static const int unKnown = -7;
+  static const int defaultError = -7;
 }
 
 class ResponseMassage {
@@ -58,7 +101,7 @@ class ResponseMassage {
   static const String cacheError = 'Cache Error,Try Again Later ';
   static const String noInternetConnection =
       'Please Check Your Internet Connection';
-  static const String unKnown = 'something went wrong , Try Again Later';
+  static const String defaultError = 'something went wrong , Try Again Later';
 }
 
 extension DataSourceExtension on DataSource {
@@ -107,8 +150,8 @@ extension DataSourceExtension on DataSource {
         return Failure(ResponseCode.noInternetConnection,
             ResponseMassage.noInternetConnection);
 
-      case DataSource.unKnown:
-        return Failure(ResponseCode.unKnown, ResponseMassage.unKnown);
+      case DataSource.defaultError:
+        return Failure(ResponseCode.defaultError, ResponseMassage.defaultError);
     }
   }
 }
