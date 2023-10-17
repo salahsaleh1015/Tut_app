@@ -8,7 +8,7 @@ const String contentType = "content-type";
 const String authorization = "authorization";
 const String accept = "accept";
 const String defaultLanguage = "language";
-int _timeOut = 60 * 1000;
+
 
 class DioFactory {
   Future<Dio> getDio() async {
@@ -17,15 +17,15 @@ class DioFactory {
     Map<String, String> headers = {
       contentType: applicationJson,
       accept: applicationJson,
-      authorization: "send token here",
+      authorization: Constants.token,
       defaultLanguage: "en" // todo get language from shared pref
     };
 
     dio.options = BaseOptions(
       baseUrl: Constants.baseUrl,
       headers: headers,
-      connectTimeout: Duration(milliseconds: _timeOut),
-      receiveTimeout: Duration(milliseconds: _timeOut),
+      connectTimeout: const Duration(milliseconds: Constants.apiTimeOut),
+      receiveTimeout: const Duration(milliseconds: Constants.apiTimeOut),
     );
 
 
