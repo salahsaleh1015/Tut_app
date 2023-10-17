@@ -7,6 +7,8 @@ import 'package:tut_app/data/network/internet_info.dart';
 import 'package:tut_app/domain/entities/entities.dart';
 import 'package:tut_app/domain/repo/repo.dart';
 
+import '../network/error_handler.dart';
+
 class RepositoryImpl implements Repository {
   final RemoteDataSource _remoteDataSource;
   final InternetInfo _internetInfo;
@@ -17,18 +19,23 @@ class RepositoryImpl implements Repository {
   Future<Either<Failure, Authentication>> login(
       LoginRequest loginRequest) async {
     if (await _internetInfo.isConnected) {
-      final response = await _remoteDataSource.login(loginRequest);
-      // its connected to internet and safe call API
-      if (response.status == 0) {
-        //success
-        return Right(response.toDomain());
-      } else {
-       // business error
-      return  Left(Failure(409 , response.message??"business error message"));
+      try {
+        final response = await _remoteDataSource.login(loginRequest);
+        // its connected to internet and safe call API
+        if (response.status == InternalCodeStatus.success) {
+          //success
+          return Right(response.toDomain());
+        } else {
+          // business error
+          return Left(Failure(InternalCodeStatus.failure,
+              response.message ?? ResponseMassage.defaultError));
+        }
+      } catch (error) {
+        return Left(ErrorHandler.handle(error).failure);
       }
     } else {
       // internet connection error
-     return  Left(Failure(501,"please check your internet connection"));
+      return Left(DataSource.noInternetConnection.getFailure());
     }
   }
 }
