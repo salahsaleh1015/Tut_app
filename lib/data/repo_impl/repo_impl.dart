@@ -7,7 +7,7 @@ import 'package:tut_app/data/network/internet_info.dart';
 import 'package:tut_app/domain/entities/entities.dart';
 import 'package:tut_app/domain/repo/repo.dart';
 
-import '../network/error_handler.dart';
+import '../network/failure/error_handler.dart';
 
 class RepositoryImpl implements Repository {
   final RemoteDataSource _remoteDataSource;

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-import 'failure/failure.dart';
+import 'failure.dart';
 
 
 // NOTE : read this class from bottom to above
