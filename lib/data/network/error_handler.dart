@@ -2,6 +2,11 @@ import 'package:dio/dio.dart';
 
 import 'failure/failure.dart';
 
+
+// NOTE : read this class from bottom to above
+
+
+
 class ErrorHandler implements Exception {
   late Failure failure;
   ErrorHandler.handle(dynamic error) {
@@ -42,7 +47,57 @@ Failure _handleError(DioException error) {
       return DataSource.internalServerError.getFailure();
   }
 }
+extension DataSourceExtension on DataSource {
+  Failure getFailure() {
+    switch (this) {
+      case DataSource.success:
+        return Failure(ResponseCode.success, ResponseMassage.success);
 
+      case DataSource.noContent:
+        return Failure(ResponseCode.noContent, ResponseMassage.noContent);
+
+      case DataSource.badRequest:
+        return Failure(ResponseCode.badRequest, ResponseMassage.badRequest);
+
+      case DataSource.forbidden:
+        return Failure(ResponseCode.forbidden, ResponseMassage.forbidden);
+
+      case DataSource.notFound:
+        return Failure(ResponseCode.notFound, ResponseMassage.notFound);
+
+      case DataSource.unAuthorized:
+        return Failure(ResponseCode.unAuthorized, ResponseMassage.unAuthorized);
+
+      case DataSource.internalServerError:
+        return Failure(ResponseCode.internalServerError,
+            ResponseMassage.internalServerError);
+
+      case DataSource.connectTimeOut:
+        return Failure(
+            ResponseCode.connectTimeOut, ResponseMassage.connectTimeOut);
+
+      case DataSource.cancel:
+        return Failure(ResponseCode.cancel, ResponseMassage.cancel);
+
+      case DataSource.receiveTimeOut:
+        return Failure(
+            ResponseCode.receiveTimeOut, ResponseMassage.receiveTimeOut);
+
+      case DataSource.sentTimeout:
+        return Failure(ResponseCode.sentTimeout, ResponseMassage.sentTimeout);
+
+      case DataSource.cacheError:
+        return Failure(ResponseCode.cacheError, ResponseMassage.cacheError);
+
+      case DataSource.noInternetConnection:
+        return Failure(ResponseCode.noInternetConnection,
+            ResponseMassage.noInternetConnection);
+
+      case DataSource.defaultError:
+        return Failure(ResponseCode.defaultError, ResponseMassage.defaultError);
+    }
+  }
+}
 enum DataSource {
   success,
   noContent,
@@ -104,54 +159,13 @@ class ResponseMassage {
   static const String defaultError = 'something went wrong , Try Again Later';
 }
 
-extension DataSourceExtension on DataSource {
-  Failure getFailure() {
-    switch (this) {
-      case DataSource.success:
-        return Failure(ResponseCode.success, ResponseMassage.success);
 
-      case DataSource.noContent:
-        return Failure(ResponseCode.noContent, ResponseMassage.noContent);
+// this class for api status code
+// NOTE : you need to change the values according to each API
+class InternalCodeStatus{
+  static const int success = 0;
+  static const int failure = 1;
 
-      case DataSource.badRequest:
-        return Failure(ResponseCode.badRequest, ResponseMassage.badRequest);
-
-      case DataSource.forbidden:
-        return Failure(ResponseCode.forbidden, ResponseMassage.forbidden);
-
-      case DataSource.notFound:
-        return Failure(ResponseCode.notFound, ResponseMassage.notFound);
-
-      case DataSource.unAuthorized:
-        return Failure(ResponseCode.unAuthorized, ResponseMassage.unAuthorized);
-
-      case DataSource.internalServerError:
-        return Failure(ResponseCode.internalServerError,
-            ResponseMassage.internalServerError);
-
-      case DataSource.connectTimeOut:
-        return Failure(
-            ResponseCode.connectTimeOut, ResponseMassage.connectTimeOut);
-
-      case DataSource.cancel:
-        return Failure(ResponseCode.cancel, ResponseMassage.cancel);
-
-      case DataSource.receiveTimeOut:
-        return Failure(
-            ResponseCode.receiveTimeOut, ResponseMassage.receiveTimeOut);
-
-      case DataSource.sentTimeout:
-        return Failure(ResponseCode.sentTimeout, ResponseMassage.sentTimeout);
-
-      case DataSource.cacheError:
-        return Failure(ResponseCode.cacheError, ResponseMassage.cacheError);
-
-      case DataSource.noInternetConnection:
-        return Failure(ResponseCode.noInternetConnection,
-            ResponseMassage.noInternetConnection);
-
-      case DataSource.defaultError:
-        return Failure(ResponseCode.defaultError, ResponseMassage.defaultError);
-    }
-  }
 }
+
+
