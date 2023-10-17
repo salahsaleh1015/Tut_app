@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:tut_app/application/costants.dart';
 
 const String applicationJson = 'application/json';
@@ -25,6 +27,13 @@ class DioFactory {
       connectTimeout: Duration(milliseconds: _timeOut),
       receiveTimeout: Duration(milliseconds: _timeOut),
     );
+
+
+    if(!kReleaseMode){
+      dio.interceptors.add(PrettyDioLogger(
+          requestHeader: true, requestBody: true, responseHeader: true));
+    }
+
 
     return dio;
   }
