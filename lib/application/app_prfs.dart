@@ -1,7 +1,7 @@
  import 'package:shared_preferences/shared_preferences.dart';
 
 import '../presentation/resources/language_maneger.dart';
- const String appPrefsKey = "ppPrefsKey";
+ const String appPrefsKey = "appPrefsKey";
 class AppPreferences{
   final SharedPreferences _sharedPreferences;
 
