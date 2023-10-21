@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:tut_app/domain/usecase/login_usecase.dart';
 import 'package:tut_app/presentation/base/base_view_model.dart';
 
 import '../../common/freezed_data_classes.dart';
@@ -11,8 +12,12 @@ class LoginViewModel
   final StreamController _passwordStreamController =
       StreamController<String>.broadcast();
 
+  var loginObject = LoginObject("", "");
 
-  LoginObject loginObject = LoginObject("","");
+  final LoginUseCase _loginUseCase;
+
+  LoginViewModel(this._loginUseCase);
+
   @override
   void dispose() {
     _passwordStreamController.close();
@@ -33,24 +38,29 @@ class LoginViewModel
 
   @override
   setPassword(String password) {
-   inputPassword.add(password);
-   loginObject = loginObject.copyWith(
-     password: password,
-   );
+    inputPassword.add(password);
+    loginObject = loginObject.copyWith(
+      password: password,
+    );
   }
 
   @override
   setUserName(String userName) {
-  inputUserName.add(userName);
-  loginObject = loginObject.copyWith(
-    userName: userName,
-  );
+    inputUserName.add(userName);
+    loginObject = loginObject.copyWith(
+      userName: userName,
+    );
   }
 
   @override
-  login() {
-    // TODO: implement login
-    throw UnimplementedError();
+  login() async {
+    (await _loginUseCase.execute(
+            LoginUseCaseInput(loginObject.password, loginObject.userName)))
+        .fold((failure) {
+      // failure
+    }, (data) {
+      // data (success)
+    });
   }
 
   @override
