@@ -30,13 +30,17 @@ ThemeData getApplicationTheme() {
         disabledColor: ColorManager.grey1,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
+
           style: ElevatedButton.styleFrom(
+
               textStyle: getRegularTextStyle(
+
                   color: ColorManager.white, fontSize: FontSize.s18),
               primary: ColorManager.primary,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(AppSize.s4),
-              ))),
+              )),
+      ),
       textTheme: TextTheme(
         displayLarge: getSemiBoldTextStyle(
             color: ColorManager.darkGrey, fontSize: FontSize.s16),
