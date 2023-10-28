@@ -8,6 +8,8 @@ import 'package:tut_app/presentation/register/register_view.dart';
 import 'package:tut_app/presentation/resources/string_manager.dart';
 import 'package:tut_app/presentation/splash/splash_view.dart';
 
+import '../../application/di.dart';
+
 class Routes {
   static const String splashRoute = "/";
   static const String onBoardingRoute = "/onBoarding";
@@ -26,6 +28,7 @@ class RouteGenerator {
       case Routes.onBoardingRoute:
         return MaterialPageRoute(builder: (_) => const OnBoardingView());
       case Routes.loginRoute:
+        initLoginModule();
         return MaterialPageRoute(builder: (_) => const LoginView());
       case Routes.registerRoute:
         return MaterialPageRoute(builder: (_) => const RegisterView());

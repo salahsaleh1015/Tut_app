@@ -16,10 +16,9 @@ class LoginViewModel
 
   var loginObject = LoginObject("", "");
 
-  //final LoginUseCase _loginUseCase;
+  final LoginUseCase _loginUseCase;
 
-  //LoginViewModel(this._loginUseCase);
-  LoginViewModel();
+  LoginViewModel(this._loginUseCase);
 
   @override
   void dispose() {
@@ -60,13 +59,13 @@ class LoginViewModel
 
   @override
   login() async {
-    // (await _loginUseCase.execute(
-    //         LoginUseCaseInput(loginObject.password, loginObject.userName)))
-    //     .fold((failure) {
-    //   // failure
-    // }, (data) {
-    //   // data (success)
-    // });
+    (await _loginUseCase.execute(
+            LoginUseCaseInput(loginObject.password, loginObject.userName)))
+        .fold((failure) {
+      // failure
+    }, (data) {
+      // data (success)
+    });
   }
 
   @override

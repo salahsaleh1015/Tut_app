@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tut_app/application/di.dart';
 import 'package:tut_app/presentation/login/view_model/login_view_model.dart';
 import 'package:tut_app/presentation/resources/string_manager.dart';
 import 'package:tut_app/presentation/resources/values_maneger.dart';
@@ -14,7 +15,10 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  final LoginViewModel _viewModel = LoginViewModel();
+
+  final LoginViewModel _viewModel =instance<LoginViewModel>();
+
+
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _userNameController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
