@@ -7,6 +7,7 @@ import '../../common/freezed_data_classes.dart';
 
 class LoginViewModel
     implements BaseViewModel, LoginViewModelInput, LoginViewModelOutput {
+
   final StreamController _userNameStreamController =
       StreamController<String>.broadcast();
   final StreamController _passwordStreamController =
