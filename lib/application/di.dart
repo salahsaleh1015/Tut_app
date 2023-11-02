@@ -23,7 +23,7 @@ Future<void> initAppModule() async {
   instance.registerLazySingleton<SharedPreferences>(() => sharedPrefs);
 
   // instance from app prefs
-  instance.registerLazySingleton<AppPreferences>(() => instance());
+  instance.registerLazySingleton<AppPreferences>(() => AppPreferences(instance()));
 
   //Internet Info
   instance.registerLazySingleton<InternetInfo>(
@@ -46,7 +46,7 @@ Future<void> initAppModule() async {
 }
 
 initLoginModule() {
-  if (!GetIt.I.isRegistered()) {
+  if (!GetIt.I.isRegistered<LoginUseCase>()) {
     instance.registerFactory<LoginUseCase>(() => LoginUseCase(instance()));
     instance.registerFactory<LoginViewModel>(() => LoginViewModel(instance()));
   }
