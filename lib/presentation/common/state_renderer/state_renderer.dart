@@ -29,6 +29,32 @@ class StateRenderer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Container();
+  }
+
+ Widget _getStateWidget(){
+    switch(stateRendererType){
+      case StateRendererType.popupLoadingState :
+        break;
+      case StateRendererType.popupErrorState :
+        break;
+      case StateRendererType.fullScreenLoadingState :
+        break;
+      case StateRendererType.fullScreenErrorState :
+        break;
+      case StateRendererType.fullScreenEmptyState :
+        break;
+      case StateRendererType.contentState :
+        break;
+    }
+ }
+
+Widget  _getItemColumn(List<Widget> children){
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: children,
+    );
+
   }
 }
