@@ -24,19 +24,19 @@ class StateRenderer extends StatelessWidget {
   StateRendererType stateRendererType;
   String message;
   String title;
-  Function retryLater;
+  Function retryLaterFunction;
   StateRenderer(
       {required this.stateRendererType,
       this.title = '',
       this.message = StringManager.loading,
-      required this.retryLater});
+      required this.retryLaterFunction});
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return _getStateWidget(context);
   }
 
-  Widget _getStateWidget() {
+  Widget _getStateWidget(BuildContext context) {
     switch (stateRendererType) {
       case StateRendererType.popupLoadingState:
         break;
@@ -52,7 +52,7 @@ class StateRenderer extends StatelessWidget {
         return _getItemColumn([
           _getAnimatedImage(),
           _getMessage(message),
-          _getRetryButton(StringManager.tryAgain),
+          _getRetryButton(StringManager.tryAgain , context),
         ]);
       case StateRendererType.fullScreenEmptyState:
         break;
@@ -70,28 +70,51 @@ class StateRenderer extends StatelessWidget {
   }
 
   Widget _getAnimatedImage() {
-    return SizedBox(
-      height: AppSize.s100,
-      width: AppSize.s100,
-      child: Container(),
-    );
-  }
-
-  Widget _getMessage(String massage) {
-    return Text(
-      massage,
-      style: getRegularTextStyle(
-        color: ColorManager.black,
-        fontSize: FontSize.s18,
+    return Center(
+      child: SizedBox(
+        height: AppSize.s100,
+        width: AppSize.s100,
+        child: Container(),
       ),
     );
   }
 
-  Widget _getRetryButton(String buttonTitle) {
-    return ElevatedButton(
-        onPressed: () {},
+  Widget _getMessage(String massage) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(AppPadding.p12),
         child: Text(
-          buttonTitle,
-        ));
+          massage,
+          style: getRegularTextStyle(
+            color: ColorManager.black,
+            fontSize: FontSize.s18,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _getRetryButton(String buttonTitle , BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(AppPadding.p12),
+        child: SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(
+              onPressed: () {
+                if(stateRendererType==StateRendererType.fullScreenLoadingState){
+                   retryLaterFunction.call();
+                }else{
+
+                  Navigator.of(context).pop();
+
+                }
+              },
+              child: Text(
+                buttonTitle,
+              )),
+        ),
+      ),
+    );
   }
 }
