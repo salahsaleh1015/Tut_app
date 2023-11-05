@@ -19,4 +19,6 @@ class StringManager {
   static const login = "login";
   static const forgetPassword = "Forget Password";
   static const registerText = "not a member, sign up ";
+
+  static const loading = "Loading....";
 }
