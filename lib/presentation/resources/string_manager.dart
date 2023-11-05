@@ -21,4 +21,9 @@ class StringManager {
   static const registerText = "not a member, sign up ";
 
   static const loading = "Loading....";
+  static const tryAgain = "Try Again";
+  static const ok = "ok";
+
+
+
 }
