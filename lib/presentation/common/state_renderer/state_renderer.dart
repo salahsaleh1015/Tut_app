@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
+import 'package:tut_app/presentation/resources/assets_manager.dart';
 import 'package:tut_app/presentation/resources/color_maneger.dart';
 import 'package:tut_app/presentation/resources/font_manager.dart';
 import 'package:tut_app/presentation/resources/style_maneger.dart';
@@ -40,26 +42,27 @@ class StateRenderer extends StatelessWidget {
     switch (stateRendererType) {
       case StateRendererType.popupLoadingState:
         return _getPopUpDialog(context, [
-          _getAnimatedImage(),
+          _getAnimatedImage(JsonAssets.loading),
         ]);
       case StateRendererType.popupErrorState:
         return _getPopUpDialog(context, [
-          _getAnimatedImage(),
+          _getAnimatedImage(JsonAssets.error),
           _getMessage(message),
           _getRetryButton(StringManager.ok, context),
         ]);
       case StateRendererType.fullScreenLoadingState:
-        return _getItemColumn([_getAnimatedImage(), _getMessage(message)]);
+        return _getItemColumn(
+            [_getAnimatedImage(JsonAssets.loading), _getMessage(message)]);
 
       case StateRendererType.fullScreenErrorState:
         return _getItemColumn([
-          _getAnimatedImage(),
+          _getAnimatedImage(JsonAssets.error),
           _getMessage(message),
           _getRetryButton(StringManager.tryAgain, context),
         ]);
       case StateRendererType.fullScreenEmptyState:
         return _getItemColumn([
-          _getAnimatedImage(),
+          _getAnimatedImage(JsonAssets.empty),
           _getMessage(message),
         ]);
       case StateRendererType.contentState:
@@ -109,13 +112,12 @@ class StateRenderer extends StatelessWidget {
     );
   }
 
-  Widget _getAnimatedImage() {
+  Widget _getAnimatedImage(String animationName) {
     return Center(
       child: SizedBox(
-        height: AppSize.s100,
-        width: AppSize.s100,
-        child: Container(),
-      ),
+          height: AppSize.s100,
+          width: AppSize.s100,
+          child: Lottie.asset(animationName)),
     );
   }
 
