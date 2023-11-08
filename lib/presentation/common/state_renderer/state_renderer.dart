@@ -39,9 +39,15 @@ class StateRenderer extends StatelessWidget {
   Widget _getStateWidget(BuildContext context) {
     switch (stateRendererType) {
       case StateRendererType.popupLoadingState:
-        return _getPopUpDialog(context);
+        return _getPopUpDialog(context, [
+          _getAnimatedImage(),
+        ]);
       case StateRendererType.popupErrorState:
-        break;
+        return _getPopUpDialog(context, [
+          _getAnimatedImage(),
+          _getMessage(message),
+          _getRetryButton(StringManager.ok, context),
+        ]);
       case StateRendererType.fullScreenLoadingState:
         return _getItemColumn([_getAnimatedImage(), _getMessage(message)]);
 
@@ -52,14 +58,19 @@ class StateRenderer extends StatelessWidget {
           _getRetryButton(StringManager.tryAgain, context),
         ]);
       case StateRendererType.fullScreenEmptyState:
-        break;
+        return _getItemColumn([
+          _getAnimatedImage(),
+          _getMessage(message),
+        ]);
       case StateRendererType.contentState:
-        break;
+        return Container();
+
+      default:
+        return Container();
     }
   }
 
-  Widget  _getPopUpDialog(BuildContext context){
-
+  Widget _getPopUpDialog(BuildContext context, List<Widget> children) {
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppSize.s16),
@@ -68,24 +79,27 @@ class StateRenderer extends StatelessWidget {
       backgroundColor: Colors.transparent,
       child: Container(
         decoration: BoxDecoration(
-          borderRadius:BorderRadius.circular(AppSize.s16),
-          color: ColorManager.white,
-          shape: BoxShape.rectangle,
-          boxShadow:const[
-            BoxShadow(
-             color: Colors.black26,
-            )
-          ]
-        ),
-        child: _getDialogContent(context),
+            borderRadius: BorderRadius.circular(AppSize.s16),
+            color: ColorManager.white,
+            shape: BoxShape.rectangle,
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black26,
+              )
+            ]),
+        child: _getDialogContent(context, children),
       ),
     );
   }
 
-
-Widget  _getDialogContent(BuildContext context){
-    return Container();
-}
+  Widget _getDialogContent(BuildContext context, List<Widget> children) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: children,
+    );
+  }
 
   Widget _getItemColumn(List<Widget> children) {
     return Column(
