@@ -6,22 +6,17 @@ import 'package:tut_app/presentation/base/base_view_model.dart';
 import '../../resources/assets_manager.dart';
 import '../../resources/string_manager.dart';
 
-class OnBoardingViewModel
-    implements
-        BaseViewModel,
-        OnBoardingViewModelInputs,
-        OnBoardingViewModelOutPuts {
-
+class OnBoardingViewModel extends BaseViewModel
+    implements OnBoardingViewModelInputs, OnBoardingViewModelOutPuts {
   final StreamController _streamController =
       StreamController<SliderViewObject>();
-
 
   late final List<SliderObject> _list;
   int _pageCurrentIndex = 0;
 
-
   @override
   void dispose() {
+    super.dispose();
     _streamController.close();
   }
 
@@ -30,8 +25,6 @@ class OnBoardingViewModel
     _list = _getSliderData();
     _postDataInView();
   }
-
-
 
   @override
   int goNext() {
@@ -57,8 +50,6 @@ class OnBoardingViewModel
     _postDataInView();
   }
 
-
-
   List<SliderObject> _getSliderData() => [
         SliderObject(StringManager.onBoardingTitle1,
             StringManager.onBoardingSubTitle1, ImageAssets.onBoardingLogo1),
@@ -69,8 +60,6 @@ class OnBoardingViewModel
         SliderObject(StringManager.onBoardingTitle4,
             StringManager.onBoardingSubTitle4, ImageAssets.onBoardingLogo4),
       ];
-
-
 
   @override
   // TODO: implement inputSliderViewObject

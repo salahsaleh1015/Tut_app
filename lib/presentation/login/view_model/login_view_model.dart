@@ -2,12 +2,12 @@ import 'dart:async';
 
 import 'package:tut_app/domain/usecase/login_usecase.dart';
 import 'package:tut_app/presentation/base/base_view_model.dart';
+import 'package:tut_app/presentation/common/state_renderer/state_rendrer_impl.dart';
 
 import '../../common/freezed_data_classes.dart';
 
-class LoginViewModel
-    implements BaseViewModel, LoginViewModelInput, LoginViewModelOutput {
-
+class LoginViewModel extends BaseViewModel
+    implements LoginViewModelInput, LoginViewModelOutput {
   final StreamController _userNameStreamController =
       StreamController<String>.broadcast();
   final StreamController _passwordStreamController =
@@ -23,13 +23,16 @@ class LoginViewModel
 
   @override
   void dispose() {
+    super.dispose();
     _passwordStreamController.close();
     _userNameStreamController.close();
+    _areAllInputsStreamController.close();
   }
 
   @override
   void start() {
-    // TODO: implement start
+    // view model tell view represent the content
+    inputState.add(ContentState());
   }
 
   @override
