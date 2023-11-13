@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:tut_app/application/costants.dart';
 import 'package:tut_app/presentation/common/state_renderer/state_renderer.dart';
@@ -81,6 +81,7 @@ extension FlowStateExtenstion on FlowState {
         }
       case ErrorState:
         {
+          dismissDialog(context);
           if (getStateRendererType() == StateRendererType.popupErrorState) {
             // represent popup
             showPopup(context, getStateRendererType(), getMessage());
@@ -97,6 +98,7 @@ extension FlowStateExtenstion on FlowState {
         }
       case ContentState:
         {
+          dismissDialog(context);
           return contentScreenWidget;
         }
       case EmptyState:
@@ -108,8 +110,18 @@ extension FlowStateExtenstion on FlowState {
         }
       default:
         {
+          dismissDialog(context);
           return contentScreenWidget;
         }
+    }
+  }
+
+  _isCurrentDialogShowing(BuildContext context) =>
+      ModalRoute.of(context)?.isCurrent != true;
+
+  dismissDialog(BuildContext context) {
+    if (_isCurrentDialogShowing(context)) {
+      Navigator.of(context, rootNavigator: true).pop(true);
     }
   }
 
