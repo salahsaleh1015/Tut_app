@@ -6,6 +6,7 @@ import 'package:tut_app/presentation/resources/font_manager.dart';
 import 'package:tut_app/presentation/resources/style_maneger.dart';
 import 'package:tut_app/presentation/resources/values_maneger.dart';
 
+import '../../resources/routes_manager.dart';
 import '../../resources/string_manager.dart';
 
 enum StateRendererType {
@@ -148,7 +149,8 @@ class StateRenderer extends StatelessWidget {
                     StateRendererType.fullScreenLoadingState) {
                   retryLaterFunction.call();
                 } else {
-                  Navigator.of(context).pop();
+
+                  Navigator.pop(context);
                 }
               },
               child: Text(
