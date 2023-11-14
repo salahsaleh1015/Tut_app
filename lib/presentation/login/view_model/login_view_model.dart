@@ -15,6 +15,7 @@ class LoginViewModel extends BaseViewModel
       StreamController<String>.broadcast();
   final StreamController _areAllInputsStreamController =
       StreamController<void>.broadcast();
+  StreamController isUserLoggedInSuccessfullyStreamController = StreamController<bool>();
 
   var loginObject = LoginObject("", "");
 
@@ -28,6 +29,7 @@ class LoginViewModel extends BaseViewModel
     _passwordStreamController.close();
     _userNameStreamController.close();
     _areAllInputsStreamController.close();
+    isUserLoggedInSuccessfullyStreamController.close();
   }
 
   @override
@@ -72,6 +74,9 @@ class LoginViewModel extends BaseViewModel
       // failure
     }, (data) {
           inputState.add(ContentState());
+
+          // navigate to main screen
+          isUserLoggedInSuccessfullyStreamController.add(true);
       // data (success)
     });
   }

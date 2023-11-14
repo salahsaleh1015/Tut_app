@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:tut_app/application/di.dart';
 import 'package:tut_app/presentation/common/state_renderer/state_rendrer_impl.dart';
 import 'package:tut_app/presentation/login/view_model/login_view_model.dart';
@@ -33,6 +34,15 @@ class _LoginViewState extends State<LoginView> {
     _userNameController.addListener(() {
       _viewModel.setUserName(_userNameController.text);
     });
+
+    _viewModel.isUserLoggedInSuccessfullyStreamController.stream
+        .listen((isLoggedIn) {
+      if (isLoggedIn) {
+        SchedulerBinding.instance.addPostFrameCallback((_) {
+          Navigator.pushReplacementNamed(context, Routes.mainRoute);
+        });
+      }
+    });
   }
 
   @override
@@ -51,7 +61,6 @@ class _LoginViewState extends State<LoginView> {
           return snapshot.data?.getScreenWidget(context, _getContentWidget(),
                   () {
                 _viewModel.login();
-
               }) ??
               _getContentWidget();
         },
