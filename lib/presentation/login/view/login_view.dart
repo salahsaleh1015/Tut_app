@@ -7,6 +7,7 @@ import 'package:tut_app/presentation/resources/color_maneger.dart';
 import 'package:tut_app/presentation/resources/string_manager.dart';
 import 'package:tut_app/presentation/resources/values_maneger.dart';
 
+import '../../../application/app_prfs.dart';
 import '../../resources/assets_manager.dart';
 import '../../resources/routes_manager.dart';
 
@@ -19,6 +20,7 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   final LoginViewModel _viewModel = instance<LoginViewModel>();
+  final AppPreferences _appPreferences = instance<AppPreferences>();
 
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _userNameController = TextEditingController();
@@ -39,6 +41,7 @@ class _LoginViewState extends State<LoginView> {
         .listen((isLoggedIn) {
       if (isLoggedIn) {
         SchedulerBinding.instance.addPostFrameCallback((_) {
+          _appPreferences.setUserLoggedIn();
           Navigator.pushReplacementNamed(context, Routes.mainRoute);
         });
       }

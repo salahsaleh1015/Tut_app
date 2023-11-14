@@ -10,6 +10,9 @@ import 'package:tut_app/presentation/resources/routes_manager.dart';
 import 'package:tut_app/presentation/resources/string_manager.dart';
 import 'package:tut_app/presentation/resources/values_maneger.dart';
 
+import '../../../application/app_prfs.dart';
+import '../../../application/di.dart';
+
 class OnBoardingView extends StatefulWidget {
   const OnBoardingView({super.key});
 
@@ -20,9 +23,11 @@ class OnBoardingView extends StatefulWidget {
 class _OnBoardingViewState extends State<OnBoardingView> {
   final PageController _pageController = PageController();
   final OnBoardingViewModel _viewModel = OnBoardingViewModel();
+   final AppPreferences _appPreferences = instance<AppPreferences>();
 
   bind() {
     _viewModel.start();
+    _appPreferences.setOnBoardingScreenViewed();
   }
 
   @override

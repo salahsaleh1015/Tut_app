@@ -6,6 +6,9 @@ import 'package:tut_app/presentation/resources/color_maneger.dart';
 import 'package:tut_app/presentation/resources/constants_maneger.dart';
 import 'package:tut_app/presentation/resources/routes_manager.dart';
 
+import '../../application/app_prfs.dart';
+import '../../application/di.dart';
+
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
 
@@ -14,6 +17,7 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
+  final AppPreferences _appPreferences = instance<AppPreferences>();
   Timer? _timer;
   _splashDelay() {
     _timer = Timer(const Duration(seconds: AppConstant.splashDelay), () {
@@ -22,7 +26,21 @@ class _SplashViewState extends State<SplashView> {
   }
 
   _goNext() {
-    Navigator.pushReplacementNamed(context, Routes.onBoardingRoute);
+    _appPreferences.isUserLoggedIn().then((isUserLoggedIn){
+      if(isUserLoggedIn){
+        Navigator.pushReplacementNamed(context, Routes.mainRoute);
+      }else{
+        _appPreferences.isOnBoardingScreenViewed().then((isOnBoardingScreenViewed){
+          if(isOnBoardingScreenViewed){
+            Navigator.pushReplacementNamed(context, Routes.loginRoute);
+          }else{
+            Navigator.pushReplacementNamed(context, Routes.onBoardingRoute);
+          }
+        });
+      }
+    });
+
+
   }
 
   @override
