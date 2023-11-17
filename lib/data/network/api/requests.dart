@@ -5,3 +5,9 @@ class LoginRequest{
 
 
 }
+
+class ResetRequest{
+  String email;
+
+  ResetRequest(this.email);
+}
