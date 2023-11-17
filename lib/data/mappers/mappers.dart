@@ -4,6 +4,7 @@ import 'package:tut_app/application/extensions.dart';
 import 'package:tut_app/data/responses/login_response/responses.dart';
 
 import '../../domain/entities/entities.dart';
+import '../responses/forget_password_response/forget_password_response.dart';
 
 extension CustomerResponseMapper on CustomerResponse? {
   Customer toDomain() {
@@ -26,5 +27,13 @@ extension ContactsResponseMapper on ContactResponse? {
 extension AuthenticationResponseMapper on AuthenticationResponse? {
   Authentication toDomain() {
     return Authentication(this?.customer.toDomain(), this?.contact.toDomain());
+  }
+}
+
+extension SupportForgetPasswordResponseMapper
+    on SupportForgetPasswordResponse? {
+  SupportForgetPassword toDomain() {
+    return SupportForgetPassword(
+        this?.supportMessage.orEmpty() ?? Constants.empty);
   }
 }
