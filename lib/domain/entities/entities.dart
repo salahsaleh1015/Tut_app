@@ -41,3 +41,10 @@ class Authentication{
 
   Authentication(this.customer, this.contacts);
 }
+
+class SupportForgetPassword{
+  String supportMessage;
+
+  SupportForgetPassword(this.supportMessage);
+
+}
