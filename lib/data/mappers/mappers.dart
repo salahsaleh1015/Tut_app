@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:tut_app/application/costants.dart';
 import 'package:tut_app/application/extensions.dart';
-import 'package:tut_app/data/responses/responses.dart';
+import 'package:tut_app/data/responses/login_response/responses.dart';
 
 import '../../domain/entities/entities.dart';
 
