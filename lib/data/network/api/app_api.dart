@@ -2,6 +2,7 @@ import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
 import 'package:tut_app/data/responses/login_response/responses.dart';
 import '../../../application/costants.dart';
+import '../../responses/forget_password_response/forget_password_response.dart';
 part 'app_api.g.dart';
 
 @RestApi(baseUrl: Constants.baseUrl)
@@ -13,6 +14,12 @@ abstract class AppServiceClient{
  Future<AuthenticationResponse>login(
      @Field("email") String email ,
      @Field("password") String password
+     );
+
+  
+  @POST("/customer/forgetPassowrd")
+ Future<SupportForgetPasswordResponse>reset(
+     @Field("email") String email
      );
 
 }
