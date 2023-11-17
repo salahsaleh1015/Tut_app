@@ -54,13 +54,13 @@ class _AppServiceClient implements AppServiceClient {
   }
 
   @override
-  Future<SupportForgetPasswordResponse> reset(String email) async {
+  Future<ForgetPasswordResponse> reset(String email) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {'email': email};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<SupportForgetPasswordResponse>(Options(
+        _setStreamType<ForgetPasswordResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -76,7 +76,7 @@ class _AppServiceClient implements AppServiceClient {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = SupportForgetPasswordResponse.fromJson(_result.data!);
+    final value = ForgetPasswordResponse.fromJson(_result.data!);
     return value;
   }
 

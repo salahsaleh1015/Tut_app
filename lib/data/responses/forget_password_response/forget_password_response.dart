@@ -9,16 +9,16 @@ class BaseForgetPasswordResponse {
 }
 
 @JsonSerializable()
-class SupportForgetPasswordResponse  extends BaseForgetPasswordResponse{
+class ForgetPasswordResponse  extends BaseForgetPasswordResponse{
   @JsonKey(name: "support")
   String? supportMessage;
 
-  SupportForgetPasswordResponse(this.supportMessage);
+  ForgetPasswordResponse(this.supportMessage);
 
-  factory SupportForgetPasswordResponse.fromJson(Map<String, dynamic> json) =>
-      _$SupportForgetPasswordResponseFromJson(json);
+  factory ForgetPasswordResponse.fromJson(Map<String, dynamic> json) =>
+      _$ForgetPasswordResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$SupportForgetPasswordResponseToJson(this);
+  Map<String, dynamic> toJson() => _$ForgetPasswordResponseToJson(this);
 }
 
 

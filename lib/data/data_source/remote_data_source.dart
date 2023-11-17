@@ -7,6 +7,7 @@ import '../network/api/app_api.dart';
 
 abstract class RemoteDataSource {
   Future<AuthenticationResponse> login(LoginRequest loginRequest);
+
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
