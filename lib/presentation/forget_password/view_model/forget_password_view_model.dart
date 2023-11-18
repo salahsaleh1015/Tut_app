@@ -33,7 +33,7 @@ class ForgetPasswordViewModel
   Sink get inputUserName => _userNameStreamController.sink;
 
   @override
-  Stream<bool> get outputUserName => _userNameStreamController.stream
+  Stream<bool> get isOutUserName => _userNameStreamController.stream
       .map((userName) => _isUserNameValid(userName));
   bool _isUserNameValid(String userName) {
     return userName.isNotEmpty;
@@ -69,5 +69,5 @@ abstract class ForgetPasswordViewModelInput {
 }
 
 abstract class ForgetPasswordViewModelOutput {
-  Stream<bool> get outputUserName;
+  Stream<bool> get isOutUserName;
 }

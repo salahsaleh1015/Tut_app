@@ -88,7 +88,7 @@ class _LoginViewState extends State<LoginView> {
                   height: AppSize.s30,
                 ),
                 StreamBuilder<bool>(
-                    stream: _viewModel.outIsUserName,
+                    stream: _viewModel.isOutUserName,
                     builder: (context, snapshot) {
                       return TextFormField(
                         keyboardType: TextInputType.emailAddress,
@@ -106,7 +106,7 @@ class _LoginViewState extends State<LoginView> {
                   height: AppSize.s30,
                 ),
                 StreamBuilder<bool>(
-                    stream: _viewModel.outIsPassword,
+                    stream: _viewModel.isOutPassword,
                     builder: (context, snapshot) {
                       return TextFormField(
                         keyboardType: TextInputType.visiblePassword,
@@ -124,7 +124,7 @@ class _LoginViewState extends State<LoginView> {
                   height: AppSize.s30,
                 ),
                 StreamBuilder<bool>(
-                    stream: _viewModel.outIsPassword,
+                    stream: _viewModel.isOutPassword,
                     builder: (context, snapshot) {
                       return SizedBox(
                         width: double.infinity,

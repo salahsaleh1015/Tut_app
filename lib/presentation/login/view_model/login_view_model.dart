@@ -83,15 +83,15 @@ class LoginViewModel extends BaseViewModel
 
   @override
   // TODO: implement outputPassword
-  Stream<bool> get outIsPassword => _passwordStreamController.stream
+  Stream<bool> get isOutPassword => _passwordStreamController.stream
       .map((password) => _isPasswordValid(password));
 
   @override
-  Stream<bool> get outIsUserName => _userNameStreamController.stream
+  Stream<bool> get isOutUserName => _userNameStreamController.stream
       .map((userName) => _isUserNameValid(userName));
 
   @override
-  Stream<bool> get outAllInputsValid =>
+  Stream<bool> get isAllInputsValid =>
       _areAllInputsStreamController.stream.map((_) => _areAllInputsValid());
 
   bool _areAllInputsValid() {
@@ -119,7 +119,7 @@ abstract class LoginViewModelInput {
 }
 
 abstract class LoginViewModelOutput {
-  Stream<bool> get outIsUserName;
-  Stream<bool> get outIsPassword;
-  Stream<bool> get outAllInputsValid;
+  Stream<bool> get isOutUserName;
+  Stream<bool> get isOutPassword;
+  Stream<bool> get isAllInputsValid;
 }
