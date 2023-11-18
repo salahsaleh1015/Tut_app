@@ -42,9 +42,9 @@ class Authentication{
   Authentication(this.customer, this.contacts);
 }
 
-class SupportForgetPassword{
+class ForgetPassword{
   String supportMessage;
 
-  SupportForgetPassword(this.supportMessage);
+  ForgetPassword(this.supportMessage);
 
 }

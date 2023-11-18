@@ -7,5 +7,5 @@ abstract class Repository{
 
 Future< Either<Failure,Authentication>> login(LoginRequest loginRequest);
 
-Future<Either<Failure,SupportForgetPassword>> reset(ResetRequest resetRequest);
+Future<Either<Failure,ForgetPassword>> reset(ResetRequest resetRequest);
 }

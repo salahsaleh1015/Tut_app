@@ -32,8 +32,8 @@ extension AuthenticationResponseMapper on AuthenticationResponse? {
 
 extension ForgetPasswordResponseMapper
     on ForgetPasswordResponse? {
-  SupportForgetPassword toDomain() {
-    return SupportForgetPassword(
+  ForgetPassword toDomain() {
+    return ForgetPassword(
         this?.supportMessage.orEmpty() ?? Constants.empty);
   }
 }
