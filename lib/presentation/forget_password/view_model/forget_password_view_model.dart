@@ -5,13 +5,13 @@ import 'package:tut_app/presentation/base/base_view_model.dart';
 import 'package:tut_app/presentation/common/freezed_data_classes.dart';
 import 'package:tut_app/presentation/common/state_renderer/state_rendrer_impl.dart';
 
-class ForgetPasswordViewModel
-    implements
-        BaseViewModel,
-        ForgetPasswordViewModelInput,
-        ForgetPasswordViewModelOutput {
+import '../../common/state_renderer/state_renderer.dart';
+
+class ForgetPasswordViewModel extends BaseViewModel
+    implements ForgetPasswordViewModelInput, ForgetPasswordViewModelOutput {
   final StreamController _userNameStreamController =
       StreamController<String>.broadcast();
+  StreamController isUserResetStreamController = StreamController<bool>();
 
   var forgetPasswordObject = ForgetPasswordObject("");
 
@@ -20,30 +20,44 @@ class ForgetPasswordViewModel
 
   @override
   void start() {
-    // TODO: implement start
+    inputState.add(ContentState());
   }
 
   @override
   void dispose() {
     _userNameStreamController.close();
+    isUserResetStreamController.close();
   }
 
   @override
-  // TODO: implement inputUserName
+
   Sink get inputUserName => _userNameStreamController.sink;
 
   @override
   Stream<bool> get isOutUserName => _userNameStreamController.stream
       .map((userName) => _isUserNameValid(userName));
+
   bool _isUserNameValid(String userName) {
     return userName.isNotEmpty;
   }
 
   @override
   reset() async {
+    inputState.add(
+        LoadingState(stateRendererType: StateRendererType.popupLoadingState));
     (await _forgetPasswordUseCase
             .execute(ResetUseCaseInput(forgetPasswordObject.userName)))
-        .fold((failure) => null, (data) => null);
+        .fold((failure) {
+      inputState
+          .add(ErrorState(StateRendererType.popupErrorState, failure.message));
+      // failure
+    }, (data) {
+      inputState.add(ContentState());
+
+      // navigate to main screen
+      isUserResetStreamController.add(true);
+      // data (success)
+    });
   }
 
   @override
@@ -53,12 +67,15 @@ class ForgetPasswordViewModel
   }
 
   @override
-  // TODO: implement inputState
-  Sink get inputState => throw UnimplementedError();
+  Sink get inputEmailValid => isUserResetStreamController.sink;
 
   @override
-  // TODO: implement outputState
-  Stream<FlowState> get outputState => throw UnimplementedError();
+  Stream<bool> get isEmailValid =>
+      isUserResetStreamController.stream.map((_) => _isAllInputValid());
+
+  bool _isAllInputValid() {
+    return _isUserNameValid(forgetPasswordObject.userName);
+  }
 }
 
 abstract class ForgetPasswordViewModelInput {
@@ -66,8 +83,10 @@ abstract class ForgetPasswordViewModelInput {
   reset();
 
   Sink get inputUserName;
+  Sink get inputEmailValid;
 }
 
 abstract class ForgetPasswordViewModelOutput {
   Stream<bool> get isOutUserName;
+  Stream<bool> get isEmailValid;
 }

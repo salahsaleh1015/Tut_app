@@ -147,7 +147,7 @@ class _LoginViewState extends State<LoginView> {
                     TextButton(
                       onPressed: () {
                         Navigator.pushReplacementNamed(
-                            context, Routes.loginRoute);
+                            context, Routes.forgetPasswordRoute);
                       },
                       child: Text(StringManager.forgetPassword,
                           textAlign: TextAlign.end,

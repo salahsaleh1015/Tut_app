@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:tut_app/presentation/common/state_renderer/state_rendrer_impl.dart';
 import 'package:tut_app/presentation/forget_password/view_model/forget_password_view_model.dart';
 import 'package:tut_app/presentation/resources/color_maneger.dart';
 import 'package:tut_app/presentation/resources/string_manager.dart';
 
+import '../../../application/app_prfs.dart';
 import '../../../application/di.dart';
 import '../../resources/assets_manager.dart';
+import '../../resources/routes_manager.dart';
 import '../../resources/values_maneger.dart';
 
 class ForgetPasswordView extends StatefulWidget {
@@ -16,15 +20,28 @@ class ForgetPasswordView extends StatefulWidget {
 
 class _ForgetPasswordViewState extends State<ForgetPasswordView> {
   final ForgetPasswordViewModel _viewModel = instance<ForgetPasswordViewModel>();
+
   final TextEditingController _userNameController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
 
+
+
   _bind(){
     _viewModel.start();
+
     _userNameController.addListener(() {
       _viewModel.setUserName(_userNameController.text);
     });
+
+    _viewModel.isUserResetStreamController.stream.listen((isReset) {
+      if (isReset) {
+        SchedulerBinding.instance.addPostFrameCallback((_) {
+          Navigator.pushReplacementNamed(context, Routes.mainRoute);
+        });
+      }
+    });
+
   }
   @override
   void initState() {
@@ -35,7 +52,20 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorManager.white,
-      body: _getContentWidget(),
+      body:Scaffold(
+        backgroundColor: ColorManager.white,
+        body: StreamBuilder<FlowState>(
+            stream: _viewModel.outputState,
+            builder: (context, snapshot){
+              return snapshot.data?.getScreenWidget(context, _getContentWidget(),
+                      () {
+                    _viewModel.reset();
+
+                  }) ??
+                  _getContentWidget();
+            },
+            ),
+      ),
     );
   }
 

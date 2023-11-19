@@ -39,4 +39,6 @@ class AppPreferences {
     return _sharedPreferences.getBool(prefsKeyUserLoggedIn) ?? false;
   }
 
+
+
 }
