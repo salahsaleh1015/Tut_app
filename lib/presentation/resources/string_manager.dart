@@ -23,6 +23,8 @@ class StringManager {
   static const loading = "Loading....";
   static const tryAgain = "Try Again";
   static const ok = "ok";
+  static const success = "success";
+  static const empty = "empty";
 
 
 

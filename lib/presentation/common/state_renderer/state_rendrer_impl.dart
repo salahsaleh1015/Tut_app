@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:tut_app/application/costants.dart';
 import 'package:tut_app/presentation/common/state_renderer/state_renderer.dart';
@@ -59,6 +58,19 @@ class EmptyState extends FlowState {
   StateRendererType getStateRendererType() => StateRendererType.contentState;
 }
 
+class SuccessState extends FlowState {
+
+  String message;
+
+  SuccessState(this.message);
+
+  @override
+  String getMessage() => message;
+
+  @override
+  StateRendererType getStateRendererType() => StateRendererType.popupSuccess;
+}
+
 extension FlowStateExtenstion on FlowState {
   Widget getScreenWidget(BuildContext context, Widget contentScreenWidget,
       Function retryLaterFunction) {
@@ -108,6 +120,17 @@ extension FlowStateExtenstion on FlowState {
               stateRendererType: getStateRendererType(),
               retryLaterFunction: retryLaterFunction);
         }
+
+      case SuccessState:
+        {
+          dismissDialog(context);
+
+          showPopup(context, StateRendererType.popupSuccess, getMessage() ,title: StringManager.success );
+
+          return contentScreenWidget;
+
+
+        }
       default:
         {
           dismissDialog(context);
@@ -126,7 +149,7 @@ extension FlowStateExtenstion on FlowState {
   }
 
   showPopup(BuildContext context, StateRendererType stateRendererType,
-      String message) {
+      String message , {String title =StringManager.empty}) {
     WidgetsBinding.instance.addPostFrameCallback((_) => showDialog(
           context: context,
           builder: (BuildContext context) => StateRenderer(

@@ -52,7 +52,7 @@ class ForgetPasswordViewModel extends BaseViewModel
           .add(ErrorState(StateRendererType.popupErrorState, failure.message));
       // failure
     }, (data) {
-      inputState.add(ContentState());
+      inputState.add(SuccessState(data.supportMessage));
 
       // navigate to main screen
       isUserResetStreamController.add(true);
