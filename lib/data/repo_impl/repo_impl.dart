@@ -38,6 +38,29 @@ class RepositoryImpl implements Repository {
       return Left(DataSource.noInternetConnection.getFailure());
     }
   }
+  @override
+  Future<Either<Failure, Authentication>> register(RegisterRequest registerRequest) async{
+    if (await _internetInfo.isConnected) {
+      try {
+        final response = await _remoteDataSource.register(registerRequest);
+        // its connected to internet and safe call API
+        if (response.status == InternalCodeStatus.success) {
+          //success
+          return Right(response.toDomain());
+        } else {
+          // business error
+          return Left(Failure(InternalCodeStatus.failure,
+              response.message ?? ResponseMassage.defaultError));
+        }
+      } catch (error) {
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      // internet connection error
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
+
 
   @override
   Future<Either<Failure, ForgetPassword>> reset(
@@ -61,4 +84,6 @@ class RepositoryImpl implements Repository {
       return Left(DataSource.noInternetConnection.getFailure());
     }
   }
+
+
 }

@@ -6,6 +6,7 @@ import '../responses/forget_password_response/forget_password_response.dart';
 
 abstract class RemoteDataSource {
   Future<AuthenticationResponse> login(LoginRequest loginRequest);
+  Future<AuthenticationResponse> register(RegisterRequest registerRequest);
   Future<ForgetPasswordResponse> reset(ResetRequest resetRequest);
 }
 
@@ -22,5 +23,17 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   @override
   Future<ForgetPasswordResponse> reset(ResetRequest resetRequest) async {
     return await _appServiceClient.reset(resetRequest.email);
+  }
+
+  @override
+  Future<AuthenticationResponse> register(
+      RegisterRequest registerRequest) async {
+    return await _appServiceClient.register(
+        registerRequest.userName,
+        registerRequest.countryCode,
+        registerRequest.phoneNumber,
+        registerRequest.email,
+        registerRequest.password,
+        registerRequest.profilePicture);
   }
 }
