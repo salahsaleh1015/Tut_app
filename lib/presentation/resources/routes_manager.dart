@@ -4,7 +4,7 @@ import 'package:tut_app/presentation/login/view/login_view.dart';
 import 'package:tut_app/presentation/main/main_view.dart';
 import 'package:tut_app/presentation/main_details/main_details_view.dart';
 import 'package:tut_app/presentation/onBoarding/view/on_boarding_view.dart';
-import 'package:tut_app/presentation/register/register_view.dart';
+import 'package:tut_app/presentation/register/view/register_view.dart';
 import 'package:tut_app/presentation/resources/string_manager.dart';
 import 'package:tut_app/presentation/splash/splash_view.dart';
 
