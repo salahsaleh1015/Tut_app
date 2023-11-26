@@ -43,8 +43,129 @@ class RegisterViewModel extends BaseViewModel
     areAllInputsValidStreamController.close();
   }
 
+  // - register inputs
   @override
+  Sink get passwordInput => passwordStreamController.sink;
 
+  @override
+  Sink get phoneNumberInput => phoneNumberStreamController.sink;
+
+  @override
+  Sink get profilePictureInput => profilePictureStreamController.sink;
+
+  @override
+  Sink get userNameInput => userNameStreamController.sink;
+
+  @override
+  Sink get emailInput => emailStreamController.sink;
+
+  @override
+  Sink get inPutAreAllInputsValid => areAllInputsValidStreamController.sink;
+
+
+  @override
+  register() {
+    // TODO: implement register
+    throw UnimplementedError();
+  }
+
+  @override
+  setCountryCode(String countryCode) {
+    if(countryCode.isNotEmpty){
+      // add the value in register object
+      registerObject = registerObject.copyWith(
+          countryCode: countryCode
+      );
+    }else{
+      // reset the value to empty string again
+      registerObject = registerObject.copyWith(
+          countryCode: ""
+      );
+    }
+    validate();
+  }
+
+  @override
+  setEmail(String email) {
+    if(isEmailValid(email)){
+      // add the value in register object
+    registerObject =  registerObject.copyWith(
+        email: email
+      );
+    }else{
+      // reset the value to empty string again
+      registerObject =   registerObject.copyWith(
+          email: ""
+      );
+    }
+    validate();
+  }
+
+  @override
+  setPassword(String password) {
+    if(_isPasswordValid(password)){
+      // add the value in register object
+      registerObject =  registerObject.copyWith(
+          password:  password
+      );
+    }else{
+      // reset the value to empty string again
+      registerObject =   registerObject.copyWith(
+          password: ""
+      );
+    }
+    validate();
+  }
+
+  @override
+  setPhoneNumber(String phoneNumber) {
+    if(_isPhoneNumberValid(phoneNumber)){
+      // add the value in register object
+      registerObject =  registerObject.copyWith(
+          phoneNumber:  phoneNumber
+      );
+    }else{
+      // reset the value to empty string again
+      registerObject =   registerObject.copyWith(
+          phoneNumber: ""
+      );
+    }
+    validate();
+  }
+
+  @override
+  setProfilePicture(File profilePicture) {
+   if(profilePicture.path.isNotEmpty){
+     registerObject = registerObject.copyWith(
+       profilePicture: profilePicture.path
+     );
+   }else{
+     registerObject = registerObject.copyWith(
+       profilePicture: ""
+     );
+   }
+   validate();
+  }
+
+  @override
+  setUserName(String userName ) {
+    if(_isUserNameValid(userName)){
+     // add the value in register object
+      registerObject = registerObject.copyWith(
+        userName: userName
+      );
+    }else{
+      // reset the value to empty string again
+      registerObject = registerObject.copyWith(
+        userName: ""
+      );
+    }
+    validate();
+  }
+
+  // outputs ---------
+
+  @override
   Stream<File> get outputIsProfilePictureValid =>profilePictureStreamController.stream.map((file) => file);
 
   @override
@@ -81,22 +202,11 @@ class RegisterViewModel extends BaseViewModel
   Stream<String?> get outputErrorUserName => outputIsUserNameValid
       .map((isUserName) => isUserName ? null : StringManager.invalidUserName);
 
-  // - register inputs
-  @override
-  Sink get passwordInput => passwordStreamController.sink;
 
   @override
-  Sink get phoneNumberInput => phoneNumberStreamController.sink;
+  Stream<bool> get outputAreAllInputsValid => areAllInputsValidStreamController.stream.map((_) => _isAllInputsValid());
 
-  @override
-  Sink get profilePictureInput => profilePictureStreamController.sink;
 
-  @override
-  Sink get userNameInput => userNameStreamController.sink;
-
-  @override
-  // TODO: implement emailInput
-  Sink get emailInput => emailStreamController.sink;
 
   // -- private functions
 
@@ -111,6 +221,21 @@ class RegisterViewModel extends BaseViewModel
   bool _isPasswordValid(String password) {
     return password.length > 5;
   }
+
+ bool _isAllInputsValid(){
+    return registerObject.userName.isNotEmpty&&
+        registerObject.countryCode.isNotEmpty&&
+        registerObject.phoneNumber.isNotEmpty&&
+        registerObject.email.isNotEmpty&&
+        registerObject.password.isNotEmpty&&
+        registerObject.profilePicture.isNotEmpty;
+ }
+
+ validate(){
+    inPutAreAllInputsValid.add(null);
+
+ }
+
 }
 
 abstract class RegisterViewModelInput {
@@ -119,6 +244,17 @@ abstract class RegisterViewModelInput {
   Sink get emailInput;
   Sink get passwordInput;
   Sink get profilePictureInput;
+  Sink get inPutAreAllInputsValid;
+
+
+  setUserName(String userName);
+  setCountryCode(String countryCode);
+  setPhoneNumber(String phoneNumber);
+  setEmail(String email);
+  setPassword(String password);
+  setProfilePicture(File profilePicture);
+  register();
+
 }
 
 abstract class RegisterViewModelOutput {
@@ -135,4 +271,6 @@ abstract class RegisterViewModelOutput {
   Stream<String?> get outputErrorPassword;
 
   Stream<File> get outputIsProfilePictureValid;
+
+  Stream<bool> get outputAreAllInputsValid;
 }
