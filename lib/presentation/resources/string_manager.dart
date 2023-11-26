@@ -26,6 +26,10 @@ class StringManager {
   static const success = "success";
   static const empty = "empty";
 
+  static const String invalidUserName = "user name must be moe than 8 char";
+  static const String  invalidPhoneNumber = "phone number  must be moe than 9 digits";
+  static const String invalidEmail = 'please enter a valid email';
+  static const String invalidPassword = 'password must be 6 numbers or more';
 
 
 }
