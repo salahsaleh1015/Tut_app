@@ -4,6 +4,7 @@ import 'package:tut_app/domain/usecase/register_usecase.dart';
 import 'package:tut_app/presentation/base/base_view_model.dart';
 
 import '../../../application/functions.dart';
+import '../../common/freezed_data_classes.dart';
 import '../../resources/string_manager.dart';
 
 class RegisterViewModel extends BaseViewModel
@@ -22,6 +23,10 @@ class RegisterViewModel extends BaseViewModel
 
   final RegisterUseCase _registerUseCase;
   RegisterViewModel(this._registerUseCase);
+
+  var registerObject = RegisterObject("","","","","","",);
+
+
 
   @override
   void start() {
