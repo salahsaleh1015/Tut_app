@@ -10,8 +10,10 @@ import 'package:tut_app/data/repo_impl/repo_impl.dart';
 import 'package:tut_app/domain/repo/repo.dart';
 import 'package:tut_app/domain/usecase/forget_password_usecase.dart';
 import 'package:tut_app/domain/usecase/login_usecase.dart';
+import 'package:tut_app/domain/usecase/register_usecase.dart';
 import 'package:tut_app/presentation/forget_password/view_model/forget_password_view_model.dart';
 import 'package:tut_app/presentation/login/view_model/login_view_model.dart';
+import 'package:tut_app/presentation/register/view_model/register_view_model.dart';
 
 import '../data/network/internet_info.dart';
 
@@ -51,6 +53,13 @@ initLoginModule() {
   if (!GetIt.I.isRegistered<LoginUseCase>()) {
     instance.registerFactory<LoginUseCase>(() => LoginUseCase(instance()));
     instance.registerFactory<LoginViewModel>(() => LoginViewModel(instance()));
+  }
+}
+
+initRegisterModule() {
+  if (!GetIt.I.isRegistered<RegisterUseCase>()) {
+    instance.registerFactory<RegisterUseCase>(() => RegisterUseCase(instance()));
+    instance.registerFactory<RegisterViewModel>(() => RegisterViewModel(instance()));
   }
 }
 
