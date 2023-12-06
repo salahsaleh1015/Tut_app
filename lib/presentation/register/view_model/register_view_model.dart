@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:tut_app/domain/usecase/register_usecase.dart';
 import 'package:tut_app/presentation/base/base_view_model.dart';
 
+import '../../../application/app_prfs.dart';
+import '../../../application/di.dart';
 import '../../../application/functions.dart';
 import '../../common/freezed_data_classes.dart';
 import '../../common/state_renderer/state_renderer.dart';
@@ -23,6 +25,9 @@ class RegisterViewModel extends BaseViewModel
       StreamController<File>.broadcast();
   StreamController areAllInputsValidStreamController =
       StreamController<void>.broadcast();
+
+  StreamController isUserRegisteredSuccessfullyStreamController = StreamController<bool>();
+
 
   final RegisterUseCase _registerUseCase;
   RegisterViewModel(this._registerUseCase);
@@ -49,6 +54,7 @@ class RegisterViewModel extends BaseViewModel
     passwordStreamController.close();
     profilePictureStreamController.close();
     areAllInputsValidStreamController.close();
+    isUserRegisteredSuccessfullyStreamController.close();
   }
 
   // - register inputs
@@ -90,7 +96,7 @@ class RegisterViewModel extends BaseViewModel
       inputState.add(ContentState());
 
       // navigate to main screen
-      //isUserLoggedInSuccessfullyStreamController.add(true);
+      isUserRegisteredSuccessfullyStreamController.add(true);
       // data (success)
     });
   }

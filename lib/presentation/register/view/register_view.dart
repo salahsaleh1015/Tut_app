@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tut_app/application/costants.dart';
@@ -10,6 +11,7 @@ import 'package:tut_app/presentation/register/view_model/register_view_model.dar
 import 'package:tut_app/presentation/resources/color_maneger.dart';
 import 'package:tut_app/presentation/resources/values_maneger.dart';
 
+import '../../../application/app_prfs.dart';
 import '../../common/state_renderer/state_rendrer_impl.dart';
 import '../../resources/assets_manager.dart';
 import '../../resources/routes_manager.dart';
@@ -34,6 +36,7 @@ class _RegisterViewState extends State<RegisterView> {
       TextEditingController();
   final TextEditingController _passwordTextEditingController =
       TextEditingController();
+  final AppPreferences _appPreferences = instance<AppPreferences>();
   _bind() {
     _userNameTextEditingController.addListener(() {
       _viewModel.setUserName(_userNameTextEditingController.text);
@@ -48,6 +51,16 @@ class _RegisterViewState extends State<RegisterView> {
 
     _passwordTextEditingController.addListener(() {
       _viewModel.setPassword(_passwordTextEditingController.text);
+    });
+
+    _viewModel.isUserRegisteredSuccessfullyStreamController.stream
+        .listen((isRegistered) {
+      if (isRegistered) {
+        SchedulerBinding.instance.addPostFrameCallback((_) {
+          _appPreferences.setUserLoggedIn();
+          Navigator.pushReplacementNamed(context, Routes.mainRoute);
+        });
+      }
     });
   }
 
