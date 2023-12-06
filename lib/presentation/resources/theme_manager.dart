@@ -51,6 +51,7 @@ ThemeData getApplicationTheme() {
         bodyLarge: getRegularTextStyle(color: ColorManager.grey),
       ),
       inputDecorationTheme: InputDecorationTheme(
+
         contentPadding: EdgeInsets.all(AppPadding.p8),
         hintStyle: getRegularTextStyle(
             color: ColorManager.grey, fontSize: FontSize.s14),

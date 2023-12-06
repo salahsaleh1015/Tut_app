@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tut_app/application/app_prfs.dart';
@@ -60,6 +61,7 @@ initRegisterModule() {
   if (!GetIt.I.isRegistered<RegisterUseCase>()) {
     instance.registerFactory<RegisterUseCase>(() => RegisterUseCase(instance()));
     instance.registerFactory<RegisterViewModel>(() => RegisterViewModel(instance()));
+    instance.registerFactory<ImagePicker>(() => ImagePicker());
   }
 }
 

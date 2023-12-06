@@ -6,10 +6,14 @@ class StringManager {
   static const onBoardingTitle3 = "SEE THE FIRST FLUTTER COURSE #3";
   static const onBoardingTitle4 = "SEE THE FIRST FLUTTER COURSE #4";
 
-  static const onBoardingSubTitle1 = "Tut app is an awesome application using clean architecture#1";
-  static const onBoardingSubTitle2 = "Tut app is an awesome application using clean architecture#2";
-  static const onBoardingSubTitle3 = "Tut app is an awesome application using clean architecture#3";
-  static const onBoardingSubTitle4 = "Tut app is an awesome application using clean architecture#4";
+  static const onBoardingSubTitle1 =
+      "Tut app is an awesome application using clean architecture#1";
+  static const onBoardingSubTitle2 =
+      "Tut app is an awesome application using clean architecture#2";
+  static const onBoardingSubTitle3 =
+      "Tut app is an awesome application using clean architecture#3";
+  static const onBoardingSubTitle4 =
+      "Tut app is an awesome application using clean architecture#4";
   static const skip = "skip";
 
   static const userName = "user name";
@@ -27,9 +31,20 @@ class StringManager {
   static const empty = "empty";
 
   static const String invalidUserName = "user name must be moe than 8 char";
-  static const String  invalidPhoneNumber = "phone number  must be moe than 9 digits";
+  static const String invalidPhoneNumber =
+      "phone number  must be moe than 9 digits";
   static const String invalidEmail = 'please enter a valid email';
   static const String invalidPassword = 'password must be 6 numbers or more';
 
+  static const register = 'register';
+
+  static const alreadyHaveAnAccount = "already Have An Account";
+
+  static const countryCode = "country Code";
+  static const phoneNumber = "Phone Number";
+  static const profilePicture = "Profile Picture";
+  static const photoCamera = "Profile Picture";
+  static const photoGallery = "Profile Picture";
+  static const email = "email";
 
 }
