@@ -47,4 +47,10 @@ class StringManager {
   static const photoGallery = "Profile Picture";
   static const email = "email";
 
+  static const home = "home";
+  static const search = "search";
+  static const notifications = "notifications";
+  static const settings = "settings";
+
+
 }
