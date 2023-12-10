@@ -1,8 +1,9 @@
 import 'package:tut_app/data/network/api/requests.dart';
-import 'package:tut_app/data/responses/login_response/responses.dart';
+
 
 import '../network/api/app_api.dart';
 import '../responses/forget_password_response/forget_password_response.dart';
+import '../responses/response/responses.dart';
 
 abstract class RemoteDataSource {
   Future<AuthenticationResponse> login(LoginRequest loginRequest);

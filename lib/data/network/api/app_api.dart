@@ -1,8 +1,9 @@
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
-import 'package:tut_app/data/responses/login_response/responses.dart';
+
 import '../../../application/costants.dart';
 import '../../responses/forget_password_response/forget_password_response.dart';
+import '../../responses/response/responses.dart';
 part 'app_api.g.dart';
 
 @RestApi(baseUrl: Constants.baseUrl)
