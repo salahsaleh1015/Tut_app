@@ -10,4 +10,7 @@ Future< Either<Failure,Authentication>> login(LoginRequest loginRequest);
 Future< Either<Failure,Authentication>> register(RegisterRequest registerRequest);
 
 Future<Either<Failure,ForgetPassword>> reset(ResetRequest resetRequest);
+
+Future<Either<Failure,HomeObject>> getHomeData();
+
 }
