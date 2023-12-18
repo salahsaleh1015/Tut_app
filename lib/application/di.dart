@@ -10,10 +10,12 @@ import 'package:tut_app/data/network/api/dio_factory.dart';
 import 'package:tut_app/data/repo_impl/repo_impl.dart';
 import 'package:tut_app/domain/repo/repo.dart';
 import 'package:tut_app/domain/usecase/forget_password_usecase.dart';
+import 'package:tut_app/domain/usecase/home_usecase.dart';
 import 'package:tut_app/domain/usecase/login_usecase.dart';
 import 'package:tut_app/domain/usecase/register_usecase.dart';
 import 'package:tut_app/presentation/forget_password/view_model/forget_password_view_model.dart';
 import 'package:tut_app/presentation/login/view_model/login_view_model.dart';
+import 'package:tut_app/presentation/main/home/view_model/home_view_model.dart';
 import 'package:tut_app/presentation/register/view_model/register_view_model.dart';
 
 import '../data/network/internet_info.dart';
@@ -71,3 +73,10 @@ initForgetPasswordModule(){
     instance.registerFactory<ForgetPasswordViewModel>(() => ForgetPasswordViewModel(instance()));
   }
 }
+
+  initHomeModule() {
+    if (!GetIt.I.isRegistered<HomeUseCase>()) {
+      instance.registerFactory<HomeUseCase>(() => HomeUseCase(instance()));
+      instance.registerFactory<HomeViewModel>(() => HomeViewModel(instance()));
+    }
+  }
