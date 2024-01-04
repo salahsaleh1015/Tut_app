@@ -52,5 +52,9 @@ class StringManager {
   static const notifications = "notifications";
   static const settings = "settings";
 
+  static const services = "services";
+  static const stores = "stores";
+
+
 
 }
