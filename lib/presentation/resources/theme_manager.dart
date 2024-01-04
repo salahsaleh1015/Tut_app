@@ -6,7 +6,7 @@ import 'package:tut_app/presentation/resources/values_maneger.dart';
 
 ThemeData getApplicationTheme() {
   return ThemeData(
-    scaffoldBackgroundColor:ColorManager.white ,
+      scaffoldBackgroundColor: ColorManager.white,
       primaryColor: ColorManager.primary,
       primaryColorDark: ColorManager.darkPrimary,
       primaryColorLight: ColorManager.lightPrimary,
@@ -30,30 +30,28 @@ ThemeData getApplicationTheme() {
         disabledColor: ColorManager.grey1,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
-
-          style: ElevatedButton.styleFrom(
-
-              textStyle: getRegularTextStyle(
-
-                  color: ColorManager.white, fontSize: FontSize.s18),
-              primary: ColorManager.primary,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(AppSize.s4),
-              )),
+        style: ElevatedButton.styleFrom(
+            textStyle: getRegularTextStyle(
+                color: ColorManager.white, fontSize: FontSize.s18),
+            primary: ColorManager.primary,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(AppSize.s4),
+            )),
       ),
       textTheme: TextTheme(
-        displayLarge: getSemiBoldTextStyle(
-            color: ColorManager.darkGrey, fontSize: FontSize.s16),
-        displayMedium: getRegularTextStyle(color: ColorManager.darkGrey, fontSize: FontSize.s14),
-        titleMedium: getMediumTextStyle(
-            color: ColorManager.primary, fontSize: FontSize.s16),
-        titleSmall: getRegularTextStyle(
-            color: ColorManager.white, fontSize: FontSize.s16),
-        bodySmall: getRegularTextStyle(color: ColorManager.grey1),
-        bodyLarge: getRegularTextStyle(color: ColorManager.grey),
-      ),
+          displayLarge: getSemiBoldTextStyle(
+              color: ColorManager.darkGrey, fontSize: FontSize.s16),
+          displayMedium: getRegularTextStyle(
+              color: ColorManager.darkGrey, fontSize: FontSize.s14),
+          titleMedium: getMediumTextStyle(
+              color: ColorManager.primary, fontSize: FontSize.s16),
+          titleSmall: getRegularTextStyle(
+              color: ColorManager.white, fontSize: FontSize.s16),
+          bodySmall: getRegularTextStyle(color: ColorManager.grey1),
+          bodyLarge: getRegularTextStyle(color: ColorManager.grey),
+          labelSmall: getBoldTextStyle(
+              color: ColorManager.grey2, fontSize: FontSize.s12)),
       inputDecorationTheme: InputDecorationTheme(
-
         contentPadding: EdgeInsets.all(AppPadding.p8),
         hintStyle: getRegularTextStyle(
             color: ColorManager.grey, fontSize: FontSize.s14),
