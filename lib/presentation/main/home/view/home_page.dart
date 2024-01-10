@@ -162,7 +162,36 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _getStores() {
-    return const Center();
+    return StreamBuilder<List<Store>>(
+        stream: _viewModel.outputStores,
+        builder: (context, snapshot) {
+          return _getStoresWidget(snapshot.data);
+        });
+  }
+
+  Widget _getStoresWidget(List<Store>? stores) {
+    return Padding(
+      padding: const EdgeInsets.only(
+          top: AppPadding.p12, left: AppPadding.p12, right: AppPadding.p12),
+      child: Flex(
+        direction: Axis.vertical,
+        children: [
+          GridView.count(
+            crossAxisCount: AppSize.s2,
+            crossAxisSpacing: AppSize.s8,
+            mainAxisSpacing: AppSize.s8,
+            physics: const ScrollPhysics(),
+            shrinkWrap: true,
+            children: List.generate(stores!.length, (index) {
+              return Card(
+                elevation: AppSize.s4,
+                child: Image.network(stores[index].image),
+              );
+            }),
+          )
+        ],
+      ),
+    );
   }
 
   @override
