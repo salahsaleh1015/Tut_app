@@ -45,7 +45,7 @@ extension ServicesResponseMapper on ServicesResponse? {
   }
 }
 
-extension StoresResponseMapper on StoresResponse? {
+extension StoresResponseMapper on StoreResponse? {
   Store toDomain() {
     return Store(
         this?.id.orZero() ?? Constants.zero,

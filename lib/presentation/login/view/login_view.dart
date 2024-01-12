@@ -135,7 +135,7 @@ class _LoginViewState extends State<LoginView> {
                                     _viewModel.login();
                                   }
                                 : null,
-                            child: const Text(StringManager.login)),
+                            child:  Text(StringManager.login,style: Theme.of(context).textTheme.titleSmall,)),
                       );
                     }),
                 const SizedBox(

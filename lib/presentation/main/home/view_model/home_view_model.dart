@@ -8,88 +8,66 @@ import 'package:tut_app/presentation/base/base_view_model.dart';
 import '../../../common/state_renderer/state_renderer.dart';
 import '../../../common/state_renderer/state_rendrer_impl.dart';
 
-class HomeViewModel extends BaseViewModel  implements HomeViewModelInputs,HomeViewModelOutputs{
+class HomeViewModel extends BaseViewModel
+    implements HomeViewModelInputs, HomeViewModelOutputs {
   HomeViewModel(this._homeUseCase);
   final HomeUseCase _homeUseCase;
 
-  final StreamController _bannersStreamController =
-      StreamController<List<BannerAd>>.broadcast();
-
-  final StreamController _servicesStreamController =
-      StreamController<List<Service>>.broadcast();
-
-  final StreamController _storesStreamController =
-      StreamController<List<Store>>.broadcast();
+  final StreamController _homeDataStreamController =
+      StreamController<HomeViewObject>.broadcast();
 
   @override
   void start() {
     getHomeData();
   }
 
-
-  getHomeData() async{
-    inputState.add(LoadingState(stateRendererType: StateRendererType.fullScreenLoadingState));
-    (await _homeUseCase.execute(Void))
-        .fold((failure) {
-    inputState.add(ErrorState(StateRendererType.fullScreenErrorState, failure.message));
-    // failure
+  getHomeData() async {
+    inputState.add(LoadingState(
+        stateRendererType: StateRendererType.fullScreenLoadingState));
+    (await _homeUseCase.execute(Void)).fold((failure) {
+      inputState.add(
+          ErrorState(StateRendererType.fullScreenErrorState, failure.message));
+      // failure
     }, (homeObject) {
-    inputState.add(ContentState());
+      inputState.add(ContentState());
+      inputHomeData.add(HomeViewObject(homeObject.data.banners,
+          homeObject.data.services, homeObject.data.stores));
 
-    inputBanners.add(homeObject.data?.banners);
-    inputServices.add(homeObject.data?.services);
-    inputStores.add(homeObject.data?.stores);
-
-    // data (success)
+      // data (success)
     });
   }
 
-
-
-
-
-
-
   @override
   void dispose() {
-    _bannersStreamController.close();
-    _servicesStreamController.close();
-    _storesStreamController.close();
+    _homeDataStreamController.close();
     super.dispose();
   }
 
   //--- InPuts
   @override
-  Sink get inputBanners => _bannersStreamController.sink;
 
-  @override
-  Sink get inputServices => _servicesStreamController.sink;
-
-  @override
-
-  Sink get inputStores =>_storesStreamController.sink;
-
-
+  Sink get inputHomeData => _homeDataStreamController.sink;
 
 //---- OutPuts
-  @override
-  Stream<List<BannerAd>> get outputBanners => _bannersStreamController.stream.map((banners) => banners);
 
   @override
-  Stream<List<Service>> get outputServices => _servicesStreamController.stream.map((services) => services);
 
-  @override
-  Stream<List<Store>> get outputStores =>_storesStreamController.stream.map((stores) => stores);
+  Stream<HomeViewObject> get outputHomeData =>
+      _homeDataStreamController.stream.map((homeData) => homeData);
 }
 
 abstract class HomeViewModelInputs {
-  Sink get inputBanners;
-  Sink get inputServices;
-  Sink get inputStores;
+  Sink get inputHomeData;
 }
 
 abstract class HomeViewModelOutputs {
-  Stream<List<BannerAd>> get outputBanners;
-  Stream<List<Service>> get outputServices;
-  Stream<List<Store>> get outputStores;
+  Stream<HomeViewObject> get outputHomeData;
+}
+
+class HomeViewObject {
+  List<BannerAd> banners;
+  List<Service> services;
+  List<Store> stores;
+
+  HomeViewObject(this.banners, this.services, this.stores);
 }

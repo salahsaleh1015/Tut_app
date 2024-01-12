@@ -103,8 +103,7 @@ class BannersResponse{
 
 
 @JsonSerializable()
-class StoresResponse{
-
+class StoreResponse{
   @JsonKey(name: "id")
   int? id;
   @JsonKey(name: "title")
@@ -112,13 +111,13 @@ class StoresResponse{
   @JsonKey(name: "image")
   String? image;
 
-  factory StoresResponse.fromJson(Map<String, dynamic>json)=>
-      _$StoresResponseFromJson(json);
+  factory StoreResponse.fromJson(Map<String, dynamic>json)=>
+      _$StoreResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$StoresResponseToJson(this);
+  Map<String, dynamic> toJson() => _$StoreResponseToJson(this);
 
 
-  StoresResponse(this.id,this.image,this.title);
+  StoreResponse(this.id,this.image,this.title);
 
 }
 @JsonSerializable()
@@ -129,7 +128,7 @@ class HomeDataResponse{
   @JsonKey(name: "banners")
   List<BannersResponse>? banners;
   @JsonKey(name: "stores")
-  List<StoresResponse>? stores;
+  List<StoreResponse>? stores;
 
   factory HomeDataResponse.fromJson(Map<String, dynamic>json)=>
       _$HomeDataResponseFromJson(json);
