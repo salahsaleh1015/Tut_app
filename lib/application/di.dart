@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tut_app/application/app_prfs.dart';
+import 'package:tut_app/data/data_source/local_data_sourse.dart';
 import 'package:tut_app/data/data_source/remote_data_source.dart';
 import 'package:tut_app/data/network/api/app_api.dart';
 import 'package:tut_app/data/network/api/dio_factory.dart';
@@ -47,9 +48,13 @@ Future<void> initAppModule() async {
   instance.registerLazySingleton<RemoteDataSource>(
       () => RemoteDataSourceImpl(instance()));
 
+  // local data source
+  instance.registerLazySingleton<LocalDataSource>(
+          () => LocalDataSourceImpl());
+
   //repository
   instance.registerLazySingleton<Repository>(
-      () => RepositoryImpl(instance(), instance()));
+      () => RepositoryImpl(instance(), instance(), instance()));
 }
 
 initLoginModule() {
