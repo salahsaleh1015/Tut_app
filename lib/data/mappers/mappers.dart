@@ -1,4 +1,3 @@
-
 import 'package:tut_app/application/costants.dart';
 import 'package:tut_app/application/extensions.dart';
 
@@ -74,24 +73,36 @@ extension HomeResponseMapper on HomeResponse? {
         .cast<Store>()
         .toList();
 
-
     List<BannerAd> banners = (this
-        ?.data
-        ?.banners
-        ?.map((bannersResponse) => bannersResponse.toDomain()) ??
-        const Iterable.empty())
+                ?.data
+                ?.banners
+                ?.map((bannersResponse) => bannersResponse.toDomain()) ??
+            const Iterable.empty())
         .cast<BannerAd>()
         .toList();
 
     List<Service> services = (this
-        ?.data
-        ?.services
-        ?.map((servicesResponse) => servicesResponse.toDomain()) ??
-        const Iterable.empty())
+                ?.data
+                ?.services
+                ?.map((servicesResponse) => servicesResponse.toDomain()) ??
+            const Iterable.empty())
         .cast<Service>()
         .toList();
 
     var data = HomeData(services, banners, stores);
     return HomeObject(data);
+  }
+}
+
+extension HomeDetailsMapper on HomeDetailsResponse? {
+  HomeDetails toDomain() {
+    return HomeDetails(
+      this?.image.orEmpty() ?? Constants.empty,
+      this?.id.orZero() ?? Constants.zero,
+      this?.title.orEmpty() ?? Constants.empty,
+      this?.details.orEmpty() ?? Constants.empty,
+      this?.services.orEmpty() ?? Constants.empty,
+      this?.about.orEmpty() ?? Constants.empty,
+    );
   }
 }
