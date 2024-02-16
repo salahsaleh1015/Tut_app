@@ -56,12 +56,10 @@ class AuthenticationResponse extends BaseResponse {
       _$AuthenticationResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$AuthenticationResponseToJson(this);
-
 }
 
-
 @JsonSerializable()
-class ServicesResponse{
+class ServicesResponse {
   @JsonKey(name: "id")
   int? id;
   @JsonKey(name: "title")
@@ -69,19 +67,16 @@ class ServicesResponse{
   @JsonKey(name: "image")
   String? image;
 
-  factory ServicesResponse.fromJson(Map<String, dynamic>json)=>
+  factory ServicesResponse.fromJson(Map<String, dynamic> json) =>
       _$ServicesResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$ServicesResponseToJson(this);
 
-
-  ServicesResponse(this.id,this.image,this.title);
-
+  ServicesResponse(this.id, this.image, this.title);
 }
 
-
 @JsonSerializable()
-class BannersResponse{
+class BannersResponse {
   @JsonKey(name: "id")
   int? id;
   @JsonKey(name: "title")
@@ -91,19 +86,16 @@ class BannersResponse{
   @JsonKey(name: "image")
   String? image;
 
-  factory BannersResponse.fromJson(Map<String, dynamic>json)=>
+  factory BannersResponse.fromJson(Map<String, dynamic> json) =>
       _$BannersResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$BannersResponseToJson(this);
 
-  BannersResponse(this.id,this.image,this.title, this.link);
-
-
+  BannersResponse(this.id, this.image, this.title, this.link);
 }
 
-
 @JsonSerializable()
-class StoreResponse{
+class StoreResponse {
   @JsonKey(name: "id")
   int? id;
   @JsonKey(name: "title")
@@ -111,18 +103,16 @@ class StoreResponse{
   @JsonKey(name: "image")
   String? image;
 
-  factory StoreResponse.fromJson(Map<String, dynamic>json)=>
+  factory StoreResponse.fromJson(Map<String, dynamic> json) =>
       _$StoreResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$StoreResponseToJson(this);
 
-
-  StoreResponse(this.id,this.image,this.title);
-
+  StoreResponse(this.id, this.image, this.title);
 }
-@JsonSerializable()
-class HomeDataResponse{
 
+@JsonSerializable()
+class HomeDataResponse {
   @JsonKey(name: "services")
   List<ServicesResponse>? services;
   @JsonKey(name: "banners")
@@ -130,60 +120,47 @@ class HomeDataResponse{
   @JsonKey(name: "stores")
   List<StoreResponse>? stores;
 
-  factory HomeDataResponse.fromJson(Map<String, dynamic>json)=>
+  factory HomeDataResponse.fromJson(Map<String, dynamic> json) =>
       _$HomeDataResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$HomeDataResponseToJson(this);
 
-
   HomeDataResponse(this.services, this.banners, this.stores);
-
 }
 
 @JsonSerializable()
-class HomeResponse extends BaseResponse{
+class HomeResponse extends BaseResponse {
   @JsonKey(name: "data")
-  HomeDataResponse ? data;
+  HomeDataResponse? data;
 
-  factory HomeResponse.fromJson(Map<String, dynamic>json)=>
+  factory HomeResponse.fromJson(Map<String, dynamic> json) =>
       _$HomeResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$HomeResponseToJson(this);
 
-
   HomeResponse(this.data);
-
-
 }
 
+@JsonSerializable()
+class HomeDetailsResponse extends BaseResponse {
+  @JsonKey(name: "image")
+  final String image;
+  @JsonKey(name: "id")
+  final int id;
+  @JsonKey(name: "title")
+  final String title;
+  @JsonKey(name: "details")
+  final String details;
+  @JsonKey(name: "services")
+  final String services;
+  @JsonKey(name: "about")
+  final String about;
 
+  factory HomeDetailsResponse.fromJson(Map<String, dynamic> json) =>
+      _$HomeDetailsResponseFromJson(json);
 
+  Map<String, dynamic> toJson() => _$HomeDetailsResponseToJson(this);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  HomeDetailsResponse(
+      this.image, this.id, this.title, this.details, this.services, this.about);
+}
