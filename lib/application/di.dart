@@ -11,12 +11,14 @@ import 'package:tut_app/data/network/api/dio_factory.dart';
 import 'package:tut_app/data/repo_impl/repo_impl.dart';
 import 'package:tut_app/domain/repo/repo.dart';
 import 'package:tut_app/domain/usecase/forget_password_usecase.dart';
+import 'package:tut_app/domain/usecase/home_details_usecase.dart';
 import 'package:tut_app/domain/usecase/home_usecase.dart';
 import 'package:tut_app/domain/usecase/login_usecase.dart';
 import 'package:tut_app/domain/usecase/register_usecase.dart';
 import 'package:tut_app/presentation/forget_password/view_model/forget_password_view_model.dart';
 import 'package:tut_app/presentation/login/view_model/login_view_model.dart';
 import 'package:tut_app/presentation/main/home/view_model/home_view_model.dart';
+import 'package:tut_app/presentation/main_details/view_model/home_details_view_model.dart';
 import 'package:tut_app/presentation/register/view_model/register_view_model.dart';
 
 import '../data/network/internet_info.dart';
@@ -31,7 +33,8 @@ Future<void> initAppModule() async {
   instance.registerLazySingleton<SharedPreferences>(() => sharedPrefs);
 
   // instance from app prefs
-  instance.registerLazySingleton<AppPreferences>(() => AppPreferences(instance()));
+  instance
+      .registerLazySingleton<AppPreferences>(() => AppPreferences(instance()));
 
   //Internet Info
   instance.registerLazySingleton<InternetInfo>(
@@ -49,8 +52,7 @@ Future<void> initAppModule() async {
       () => RemoteDataSourceImpl(instance()));
 
   // local data source
-  instance.registerLazySingleton<LocalDataSource>(
-          () => LocalDataSourceImpl());
+  instance.registerLazySingleton<LocalDataSource>(() => LocalDataSourceImpl());
 
   //repository
   instance.registerLazySingleton<Repository>(
@@ -66,22 +68,36 @@ initLoginModule() {
 
 initRegisterModule() {
   if (!GetIt.I.isRegistered<RegisterUseCase>()) {
-    instance.registerFactory<RegisterUseCase>(() => RegisterUseCase(instance()));
-    instance.registerFactory<RegisterViewModel>(() => RegisterViewModel(instance()));
+    instance
+        .registerFactory<RegisterUseCase>(() => RegisterUseCase(instance()));
+    instance.registerFactory<RegisterViewModel>(
+        () => RegisterViewModel(instance()));
     instance.registerFactory<ImagePicker>(() => ImagePicker());
   }
 }
 
-initForgetPasswordModule(){
-  if(!GetIt.I.isRegistered<ForgetPasswordUseCase>()){
-    instance.registerFactory<ForgetPasswordUseCase>(() => ForgetPasswordUseCase(instance()));
-    instance.registerFactory<ForgetPasswordViewModel>(() => ForgetPasswordViewModel(instance()));
+initForgetPasswordModule() {
+  if (!GetIt.I.isRegistered<ForgetPasswordUseCase>()) {
+    instance.registerFactory<ForgetPasswordUseCase>(
+        () => ForgetPasswordUseCase(instance()));
+    instance.registerFactory<ForgetPasswordViewModel>(
+        () => ForgetPasswordViewModel(instance()));
   }
 }
 
-  initHomeModule() {
-    if (!GetIt.I.isRegistered<HomeUseCase>()) {
-      instance.registerFactory<HomeUseCase>(() => HomeUseCase(instance()));
-      instance.registerFactory<HomeViewModel>(() => HomeViewModel(instance()));
-    }
+initHomeModule() {
+  if (!GetIt.I.isRegistered<HomeUseCase>()) {
+    instance.registerFactory<HomeUseCase>(() => HomeUseCase(instance()));
+    instance.registerFactory<HomeViewModel>(() => HomeViewModel(instance()));
   }
+
+}
+
+initHomeDetailsModule() {
+  if (!GetIt.I.isRegistered<HomeDetailsUseCase>()) {
+    instance.registerFactory<HomeDetailsUseCase>(
+            () => HomeDetailsUseCase(instance()));
+    instance.registerFactory<HomeDetailsViewModel>(
+            () => HomeDetailsViewModel(instance()));
+  }
+}

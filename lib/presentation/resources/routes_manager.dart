@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tut_app/presentation/forget_password/view/forget_password_view.dart';
 import 'package:tut_app/presentation/login/view/login_view.dart';
 import 'package:tut_app/presentation/main/main_view.dart';
-import 'package:tut_app/presentation/main_details/main_details_view.dart';
+import 'package:tut_app/presentation/main_details/view/main_details_view.dart';
 import 'package:tut_app/presentation/onBoarding/view/on_boarding_view.dart';
 import 'package:tut_app/presentation/register/view/register_view.dart';
 import 'package:tut_app/presentation/resources/string_manager.dart';
@@ -40,6 +40,7 @@ class RouteGenerator {
         initHomeModule();
         return MaterialPageRoute(builder: (_) => const MainView());
       case Routes.mainDetailsRoute:
+        initHomeDetailsModule();
         return MaterialPageRoute(builder: (_) => const MainDetailsView());
       default:
         return unDefinedRoute();
