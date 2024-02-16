@@ -1,6 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 part 'responses.g.dart';
 
+// command to generate file.g
+// flutter packages pub run build_runner build --delete-conflicting-outputs
+
+
 @JsonSerializable()
 class BaseResponse {
   @JsonKey(name: "status")

@@ -29,5 +29,9 @@ abstract class AppServiceClient {
 
   @GET("/home")
   Future<HomeResponse> getHomeData();
+  
+  
+  @GET("/detailsScreen/1")
+  Future<HomeDetailsResponse> getHomeDetailsData();
 
 }

@@ -94,3 +94,4 @@ class HomeObject {
 
   HomeObject(this.data);
 }
+
