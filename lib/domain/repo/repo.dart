@@ -13,4 +13,6 @@ Future<Either<Failure,ForgetPassword>> reset(ResetRequest resetRequest);
 
 Future<Either<Failure,HomeObject>> getHomeData();
 
+Future<Either<Failure,HomeDetails>> getHomeDetailsData();
+
 }
