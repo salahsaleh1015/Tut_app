@@ -131,6 +131,50 @@ class RepositoryImpl implements Repository {
     }
   }
 
+  @override
+  Future<Either<Failure, HomeDetails>> getHomeDetailsData() async{
+    try {
+      // get response from cache
+      final response = await _localDataSource.getHomeDetailsData();
+      return Right(response.toDomain());
+    } catch (cacheError) {
+      // cache is not existing or cache is not valid
+
+      // its the time to get from API side
+      if (await _internetInfo.isConnected) {
+        // its connected to internet, its safe to call API
+        try {
+          final response = await _remoteDataSource.getHomeDetailsData();
+
+          if (response.status == InternalCodeStatus.success) {
+            // success
+            // return either right
+            // return data
+            // save home response to cache
+
+            // save response in cache (local data source)
+            _localDataSource.saveHomeDetailsToCache(response);
+
+            return Right(response.toDomain());
+          } else {
+            // failure --return business error
+            // return either left
+            return Left(Failure(InternalCodeStatus.failure,
+                response.message ?? ResponseMassage.defaultError));
+          }
+        } catch (error) {
+          return Left(ErrorHandler
+              .handle(error)
+              .failure);
+        }
+      } else {
+        // return internet connection error
+        // return either left
+        return Left(DataSource.noInternetConnection.getFailure());
+      }
+    }
+  }
+
 
 
   }

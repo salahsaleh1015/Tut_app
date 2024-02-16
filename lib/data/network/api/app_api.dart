@@ -6,6 +6,10 @@ import '../../responses/forget_password_response/forget_password_response.dart';
 import '../../responses/response/responses.dart';
 part 'app_api.g.dart';
 
+
+// command to generate file.g
+// flutter pub run build_runner build
+
 @RestApi(baseUrl: Constants.baseUrl)
 abstract class AppServiceClient {
   factory AppServiceClient(Dio dio, {String baseUrl}) = _AppServiceClient;
