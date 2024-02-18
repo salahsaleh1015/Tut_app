@@ -64,6 +64,7 @@ abstract class HomeViewModelOutputs {
   Stream<HomeViewObject> get outputHomeData;
 }
 
+
 class HomeViewObject {
   List<BannerAd> banners;
   List<Service> services;
